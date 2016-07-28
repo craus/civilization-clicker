@@ -102,16 +102,50 @@ function createContestant(params) {
   }
   
   // Rules common things
+    
+  var gameName = "contestant"
+  var saveName = gameName+"SaveData"
   
-  var processes = []
+  var savedata
+  if (localStorage[saveName] != undefined) {
+    savedata = JSON.parse(localStorage[saveName])
+  } else {
+    savedata = {
+      realTime: new Date().getTime()
+    }
+  }
+  console.log("loaded " + gameName + " save: ", savedata)
+  
+  var saveWiped = false
+  
+  var save = function(timestamp) {
+    if (saveWiped) {
+      return
+    }
+    savedata = {}
+    resources.forEach(function(resource) {
+      savedata[resource.name] = resource.value
+    })
+    savedata.realTime = timestamp || new Date().getTime()
+    localStorage[saveName] = JSON.stringify(savedata)
+  } 
+  
+  wipeSave = function() {
+    saveWiped = true
+    localStorage.removeItem(saveName)
+    location.reload()
+  }
   
   var v = function(initialValue, name) {
+    if (savedata[name] != undefined) {
+      initialValue = savedata[name]
+    }
     return {
       value: initialValue, 
       name: name,
       get: function(){return this.value}
     }
-  }
+  }  
   
   var c = function(calculator) {
     return {
@@ -119,6 +153,8 @@ function createContestant(params) {
     }
   }
   
+  var processes = []
+
   var k = function(x){return c(function(){return x})}
   
   // rules
@@ -291,7 +327,7 @@ function createContestant(params) {
 
   var linear = {}
   
-  var buyEvents = [
+  var gameEvents = [
     {
       name: 'Solve problem',
       cost: [[codeLines, k(10)]],
@@ -356,11 +392,29 @@ function createContestant(params) {
   ].map(function(event) {
     return ((event.type == linear) ? buyEvent : unlinearBuyEvent)(event)
   })
+  
+  var buyEvents = gameEvents.concat([
+    buyEvent({
+      name: "Advance Second",
+      cost: [],
+      reward: [[secondTicked, k(1)]],
+      type: linear,
+      alwaysTopButton: 'off'
+    }),     
+    buyEvent({
+      name: "Wipe Save",
+      cost: [],
+      reward: [[unpredictableEvent({effect: wipeSave}), k(1)]],
+      type: linear,
+      alwaysTopButton: 'off',
+      upButton: 'off'
+    })  
+  ])
     
   contestant = createUnit($.extend({
 
     paint: function() {
-
+      //return
       buttons = []
       x0 = 250
       y0 = 10
@@ -402,7 +456,10 @@ function createContestant(params) {
       })
     },
     tick: function() {
-      processes.forEach(call('tick'))
+      var currentTime = new Date().getTime()
+      var deltaTime = currentTime - savedata.realTime
+      secondTicked.run(deltaTime / 1000)
+      save(currentTime)
     },
     click: function(x, y) {
       buttons.forEach(function(button) {

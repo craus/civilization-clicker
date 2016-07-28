@@ -22,7 +22,8 @@ window.onload = function() {
   } 
  
   eps = 1e-8
-  game = createAscender()
+  //game = createElemental()
+  game = createContestant()
   
   space = createSpace({speed: 1})
   
