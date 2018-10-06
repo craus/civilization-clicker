@@ -1,5 +1,18 @@
+const eps = 1e-9
+
 toType = function(obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+}
+
+log = function(x, y) {
+  return Math.log(x) / Math.log(y)
+}
+
+round = function(x, s) {
+  s = s || 1
+  var p = Math.pow(10, Math.floor(log(x, 10))-s+1)
+  
+  return Math.round(x/p)*p
 }
 
 function normAng(ang)
@@ -21,6 +34,24 @@ function dist(x1, y1, x2, y2) {
 
 function rnd(min, max) {
   return min + Math.random()*(max-min)
+}
+function chances(p, q) {
+  return p/(p+q)
+}
+function rndEvent(p,q=1-p) {
+  return Math.random() < chances(p, q)
+}
+function rndSplit(x, n) {
+  var splitters = [0,x]
+  for (var i = 0; i < n-1; i++) {
+    splitters.push(rnd(0,x))
+  }
+  splitters.sort((a,b)=>a-b)
+  var result = []
+  for (var i = 0; i < n; i++) {
+    result.push(splitters[i+1]-splitters[i])
+  }
+  return result
 }
 
 identityMatrix = [1,0,0,1,0,0]
@@ -122,4 +153,84 @@ function next(a, x, d) {
   return a[(a.indexOf(x)+(d || 1)+a.length) % a.length]
 }
 
+function enable(el, on) {
+  el.prop('disabled', !on)
+  if (!on) {
+    el.tooltip('hide')
+  }
+}
+
+sign = function(x) { 
+  if (x == null) return null
+  if (x > 0) return "+";
+  return "";
+}
+signed = function(x) {
+  if (x == null) return null
+  return sign(x) + x
+}
+large = function(x) {
+  if (x == null) return null
+  if (x == 0) return 0
+  if (Math.abs(x) > 1e4*(1+eps) || Math.abs(x) < 1-eps) return x.toPrecision(4).replace('+','')
+  if (Math.abs(x - Math.floor(x+eps)) < eps) return Math.floor(x+eps)
+  return x.toPrecision(4).replace('+','') 
+}
+precision = function(x, p = 4) {
+  if (x == null) return null
+  if (x == 0) return 0
+  return x.toPrecision(p).replace('+','') 
+}
+noZero = function(x, func = x => x) {
+  return x == 0 || x == null ? "" : func(x)
+}
+noSmall = function(x) {
+  return Math.abs(x) < eps ? 0 : x
+}
+const Format = {
+  round: function(x, s) {
+    s = s || 0
+    p = Math.pow(10, s)
+    return Math.round(x*p)/p
+  },
+  time: function(x) {
+    if (x >= Number.POSITIVE_INFINITY) {
+      return '#{0}&nbsp;s'.i(large(x))
+    }
+    return moment.duration(x,'s').format("d [days] hh:mm:ss", { trim: true, precision: 1 })
+  },
+  percent: function(x) {
+    return '#{0}%'.i(Math.round(x*100))
+  }
+}
+
+
+setTitle = function(el, title) {
+  el.attr('data-original-title', title)
+}
+formatText = function(el, text, text1) {
+  var format = el.attr('data-text')
+  if (format == undefined) {
+    format = "#{0}"
+  }
+  return format.replace('#{0}', text).replace('#{1}', text1)
+}
+setFormattedText = function(el, text, text1) {
+  var t = formatText(el, text, text1)
+  if (el.length > 0 && el.text() != t) {
+    //console.log("setting text", el, "was: ", el.text(), "is: ", t)
+    el.html(t)
+  }
+}
+needResort = false
+setSortableValue = function(el, value) {
+  var old = el.attr('data-value')
+  if (old != value) {
+    el.attr('data-value', value)
+    needResort = true
+  }
+}
+instantiate = function(name) {
+  return $("." + name + ":first").clone().removeClass("hidden " + name)
+}
 

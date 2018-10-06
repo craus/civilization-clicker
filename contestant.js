@@ -1,112 +1,10 @@
 function createContestant(params) {
   
-  // UI 
- 
-  var x0
-  var y0
-  var sz = 40
-        
-  var lines
-  var print = function(text, align, baseline, font) {
-    ui.text(text, x0, y0+sz*lines, colors.white, font || sz, align || "start", baseline || "top")
-    lines += 1
-  }
-  var button = function(onclick) {
-    var d = sz * 0.1
-    ui.rect(x0-sz+d,y0+sz*lines+d,sz-2*d,sz-2*d,colors.green)
-    buttons.push({l: x0-sz+d, t: y0+sz*lines+d, r: x0-d, b: y0+sz+sz*lines-d, onclick: onclick})
-  }
-  var commandButton = function(command) {
-    command.adjust()
-    var d = 0.1
-    var arrow = function() {
-      ui.polygon([
-        {x: 0, y: -0.5+d},
-        {x: -0.5+d, y: 0.5-d},
-        {x: 0.5-d, y: 0.5-d}
-      ])          
-    }
-    ui.transform(x0-4*sz+sz/2,y0+sz*lines+sz/2,sz)
-    if ((command.alwaysTopButton || 'on') == 'on') {
-      ui.move(0,0)  
-      ui.color(command.alwaysTop ? colors.red : colors.green)
-      arrow()
-      ui.line(-0.5+d, -0.5+d, 0.5-d, -0.5+d,3)
-      ui.untransform()
-      buttons.push({
-        l: x0-4*sz+d, 
-        t: y0+sz*lines+d, 
-        r: x0-4*sz+sz-d, 
-        b: y0+sz+sz*lines-d, 
-        onclick: function(){command.switchAlwaysTop()}
-      })       
-    }
-    
-    if (command.canZoomUp()) {
-      ui.move(1,0)
-      ui.color(colors.green)
-      arrow()
-      ui.untransform()
-      buttons.push({
-        l: x0-3*sz+d,
-        t: y0+sz*lines+d, 
-        r: x0-3*sz+sz-d, 
-        b: y0+sz+sz*lines-d, 
-        onclick: function(){command.zoomUp()}       
-      })
-    }
-
-    if (command.canZoomDown() && !command.alwaysTop) {
-      ui.move(2,0)
-      ui.rotate(Math.PI)
-      ui.color(colors.green)
-      arrow()
-      ui.untransform()
-      ui.untransform()
-      buttons.push({
-        l: x0-2*sz+d, 
-        t: y0+sz*lines+d, 
-        r: x0-2*sz+sz-d, 
-        b: y0+sz+sz*lines-d, 
-        onclick: function(){command.zoomDown()}
-      })       
-    }
-    
-    if (command.canUse()) {
-      ui.move(3,0)
-      ui.rotate(Math.PI/2)
-      ui.color(colors.green)
-      arrow()
-      ui.untransform()
-      ui.untransform()
-      buttons.push({
-        l: x0-1*sz+d, 
-        t: y0+sz*lines+d, 
-        r: x0-1*sz+sz-d, 
-        b: y0+sz+sz*lines-d, 
-        onclick: function(){command.use()}
-      })       
-    }
-    ui.untransform()
-  }
-  
-  var signPrefix = function(x) { 
-    if (x > 0) return "+";
-    return "";
-  }
-  large = function(x) {
-    if (x == 0) return 0
-    if (Math.abs(x) > 1e4*(1+eps) || Math.abs(x) < 1-eps) return x.toPrecision(4) 
-    if (Math.abs(x - Math.floor(x+eps)) < eps) return Math.floor(x+eps)
-    return x.toPrecision(4) 
-  }
-  
   // Rules common things
     
   var gameName = "contestant"
   var saveName = gameName+"SaveData"
-  
-  var savedata
+
   if (localStorage[saveName] != undefined) {
     savedata = JSON.parse(localStorage[saveName])
   } else {
@@ -124,10 +22,10 @@ function createContestant(params) {
     }
     savedata = {}
     resources.forEach(function(resource) {
-      savedata[resource.name] = resource.value
+      savedata[resource.id] = resource.value
     })
-    savedata.realTime = timestamp || new Date().getTime()
-    localStorage[saveName] = JSON.stringify(savedata)
+    savedata.realTime = timestamp || Date.now()
+    //localStorage[saveName] = JSON.stringify(savedata)
   } 
   
   wipeSave = function() {
@@ -136,36 +34,18 @@ function createContestant(params) {
     location.reload()
   }
   
-  var v = function(initialValue, name) {
-    if (savedata[name] != undefined) {
-      initialValue = savedata[name]
-    }
-    return {
-      value: initialValue, 
-      name: name,
-      get: function(){return this.value}
-    }
-  }  
-  
-  var c = function(calculator) {
-    return {
-      get: calculator
-    }
-  }
-  
   var processes = []
-
-  var k = function(x){return c(function(){return x})}
   
   // rules
   
   // rules balance calculation
-  var A = Math.log(100)/100/Math.log(1.17)
-  var B = Math.log(100)/100/Math.log(1.23)
+  var A = Math.log(100)/100/Math.log(1.17) // на сколько порядков возрастёт множитель алгоритмов, если опыт возрастёт на 1 порядок
+  var RA = Math.log(1.05)/Math.log(1.17) // на сколько порядков возрастёт множитель алгоритмов для рейтинга, если опыт возрастёт на 1 порядок
+  var B = Math.log(100)/100/Math.log(1.23) // на сколько порядков возрастёт скорость печати, если опыт возрастёт на 1 порядок
   var AB_route = B/(1-A)
   
   var Im = Math.log(100)/100/Math.log(1.19)
-  var Id = 0.2 / (Math.log(2))
+  var Id = 0.2 / (Math.log(1.37))
   var u = (B + Im) / (1-A)
   var V = Id * u
   
@@ -174,6 +54,13 @@ function createContestant(params) {
   var Max_contribution_multiplier_per_contest = Math.exp(Cmax)
   var Norm_contribution_multiplier_per_contest = Math.exp(Cnorm)
 
+  var RC = (RA + B) / (1-A)    // на сколько порядков возрастёт рейтинг, если вклад возрастёт на 1 порядок
+  // r – порядок рейтинга, с – порядок вклада
+  // тогда r = c * RC + q, где q - на сколько игрок старается держать рейтинг
+  // q = r - c * RC
+  // q IN (-inf, inf)
+  // contribution_multiplier_per_contest IN (0, Max_contribution_multiplier_per_contest)
+  // пусть будет contribution_multiplier_per_contest = (atan(q) / (PI/2) + 1) / 2 * Max_contribution_multiplier_per_contest
   var R = Math.log(10) / Math.log(1.07) 
   
   var r_max = (Max_contribution_multiplier_per_contest-1) * 10000
@@ -185,6 +72,7 @@ function createContestant(params) {
   //var V = Id * (1+Im+Im*A/(1-A))
   balance = {
     A: A,
+    RA: RA,
     B: B,
     AB_route: AB_route,
     Im: Im,
@@ -194,6 +82,7 @@ function createContestant(params) {
     Max_contribution_multiplier_per_contest: Max_contribution_multiplier_per_contest,
     Norm_contribution_multiplier_per_contest: Norm_contribution_multiplier_per_contest,
     R: R,
+    RC: RC,
     r_max: r_max,
     id_max: id_max,
     r_norm: r_norm,
@@ -201,12 +90,6 @@ function createContestant(params) {
   }
   console.log("Balance: ", balance)
   
-  var digitFunction = function(base, resource)
-  {
-    return function() {
-      return Math.pow(base, Math.floor(resource.get()/base)) * ((resource.get())%base+1) 
-    }
-  }
   // var testResource = v(0, 'test resource')
   // var f = digitFunction(10, testResource)
   // for (var i = 0; i < 100; i++) {
@@ -215,19 +98,25 @@ function createContestant(params) {
     // console.log("f: " + f())
   // }
   
-  var codeLines = v(0, 'code lines')
-  var experience = v(0, 'experience')
-  var algorithms = v(0, 'algorithms')
-  var imagination = v(0, 'imagination')
-  var blindTyping = v(0, 'blind typing')
-  var ideas = v(0, 'ideas')
-  var totalIdeas = v(0, 'total ideas') 
-  var contribution = v(0, 'contribution')
-  var money = v(0, 'money')
-  var cormen = v(0, 'cormen level')
-  var keyboard = v(0, 'keyboard level')
-  var rating = v(0, 'rating')
-  var time = v(0, 'time')
+  var codeLines = variable(7, 'codeLines', 'code lines')
+  var experience = variable(0, 'experience', 'experience', {formatter: large})
+  var algorithms = variable(0, 'algorithms')
+  var totalAlgorithms = variable(0, 'totalAlgorithms')
+  var algorithmsMastery = variable(0, 'algorithmsMastery', 'algorithms mastery')
+  var imagination = variable(0, 'imagination')
+  var totalImagination = variable(0, 'totalImagination')
+  var imaginationMastery = variable(0, 'imaginationMastery', 'imagination mastery')
+  var blindTyping = variable(0, 'blindTyping', 'blind typing')
+  var totalBlindTyping = variable(0, 'totalBlindTyping')
+  var blindTypingMastery = variable(0, 'blindTypingMastery', 'blind typing mastery')
+  var ideas = variable(0, 'ideas', 'ideas', {formatter: large})
+  var totalIdeas = variable(0, 'totalIdeas', 'total ideas') 
+  var contribution = variable(0, 'contribution', 'contribution', {formatter: large})
+  var money = variable(0, 'money', 'money', {formatter: large})
+  var cormen = variable(0, 'cormenLevel', 'cormen level')
+  var keyboard = variable(0, 'keyboardLevel', 'keyboard level')
+  var rating = variable(0, 'rating', 'rating', {formatter: large})
+  var time = variable(0, 'time')
 
   var resources = [
     codeLines, 
@@ -235,6 +124,12 @@ function createContestant(params) {
     algorithms,
     imagination,
     blindTyping,
+    algorithmsMastery,
+    imaginationMastery,
+    blindTypingMastery,
+    totalAlgorithms,
+    totalImagination,
+    totalBlindTyping,   
     ideas, 
     totalIdeas, 
     contribution,
@@ -245,10 +140,21 @@ function createContestant(params) {
     time,     
   ]
   
+  var algorithmCost = calculatable(function(){return 100*Math.pow(1.17, totalAlgorithms.get()) / Math.pow(10, cormen.get())})
+  var blindTypingCost = calculatable(function(){return Math.pow(1.23, totalBlindTyping.get()) / Math.pow(10, keyboard.get())})
+  var imaginationCost = calculatable(function(){return 1e5*Math.pow(1.19, totalImagination.get())})
+
+  var experiencePerProblem = calculatable(function(){return (1+algorithms.get()) * Math.pow(100, algorithmsMastery.get())})
+  var ideasPerProblem = calculatable(function() {return (1+imagination.get()) * Math.pow(100, imaginationMastery.get()) / Math.pow(1.37, totalIdeas.get()) / 100})
+  
+  var ratingQuality = calculatable(function() {return Math.log(rating.get()+1) - 0.75 * Math.log(contribution.get()+1)})
+  var normalizedContributionMultiplier = calculatable(function() {return Math.atan(ratingQuality.get()) / (Math.PI/2)}) // IN (-1, 1)
+  var contributionMultiplier = calculatable(function() {return Math.pow(8.8, normalizedContributionMultiplier.get())})
+
   var ideaGet = createEvent({
     reward: [
-      [ideas, k(1)],
-      [totalIdeas, k(1)]
+      [ideas, constant(1)],
+      [totalIdeas, constant(1)]
     ]
   })
   // problemSolvedGainsIdea = {
@@ -275,45 +181,47 @@ function createContestant(params) {
   
   problemSolvedGainsIdea = createUnlinearEvent({
     reward: [
-      [ideaGet, c(function() {return digitFunction(100,imagination)() / Math.pow(1.11, totalIdeas.get())})], 
+      [ideaGet, ideasPerProblem], 
     ],
     dependence: totalIdeas
   })
   
   contestPlayedGainsRating = createUnlinearEvent({
     reward: [
-      [rating, c(function(){return Math.pow(10, algorithms.get()) / Math.floor(Math.pow(1.07, rating.get()))})]
+      [rating, 
+      calculatable(function(){return Math.pow(1.05, algorithms.get() + 100 * algorithmsMastery.get() - 0.01 * rating.get())})]
     ],
     dependence: rating
   })
   
   var problemSolved = createEvent({
     reward: [
-      [experience, c(digitFunction(100, algorithms))], 
-      [problemSolvedGainsIdea, k(1)]
+      [experience, experiencePerProblem], 
+      [problemSolvedGainsIdea, constant(1)]
     ]
   })
   
   var problemHelpedToSolve = createEvent({
     reward: [
-      [experience, c(digitFunction(100, algorithms))],
+      [experience, experiencePerProblem],
     ]
   })
   
   var secondTicked = createEvent({
     reward: [
-      [codeLines, c(digitFunction(100, blindTyping))]
+      [codeLines, calculatable(function(){return (1+blindTyping.get()) * Math.pow(100, blindTypingMastery.get())})],
+      [time, constant(1)]
     ]
   })
   
   var events = [problemSolved]
 
   var ticker = derivative({
-    speed: k(1),
+    speed: constant(1),
     value: secondTicked
   })
   var timer = derivative({
-    speed: k(1),
+    speed: constant(1),
     value: time
   })
   var processes = [
@@ -330,62 +238,91 @@ function createContestant(params) {
   var gameEvents = [
     {
       name: 'Solve problem',
-      cost: [[codeLines, k(10)]],
+      id: 'solve',
+      cost: [[codeLines, constant(10)]],
       reward: problemSolved,
       type: linear
     },
     {
       name: 'Learn algorithm',
-      cost: [[experience, c(function(){return Math.pow(1.17, algorithms.get()) / Math.pow(10, cormen.get())})]],
-      reward: [[algorithms, k(1)]]
+      id: 'learnAlgorithms',
+      cost: [[experience, algorithmCost]],
+      reward: [[algorithms, constant(1)], [totalAlgorithms, constant(1)]]
     },   
     {
       name: 'Learn blind typing',
-      cost: [[experience, c(function(){return Math.pow(1.23, blindTyping.get()) / Math.pow(10, keyboard.get())})]],
-      reward: [[blindTyping, k(1)]]
+      id: 'learnBlindTyping',
+      cost: [[experience, blindTypingCost]],
+      reward: [[blindTyping, constant(1)], [totalBlindTyping, constant(1)]]
     },
     {
       name: 'Learn imagination',
-      cost: [[experience, c(function(){return Math.pow(1.19, imagination.get())})]],
-      reward: [[imagination, k(1)]]
+      id: 'learnImagination',
+      cost: [[experience, imaginationCost]],
+      reward: [[imagination, constant(1)], [totalImagination, constant(1)]]
+    },
+    {
+      name: 'Learn algorithms mastery',
+      id: 'learnAlgorithmsMastery',
+      cost: [[algorithms, constant(100)]],
+      reward: [[algorithmsMastery, constant(1)]]
+    },   
+    {
+      name: 'Learn blind typing mastery',
+      id: 'learnBlindTypingMastery',
+      cost: [[blindTyping, constant(100)]],
+      reward: [[blindTypingMastery, constant(1)]]
+    },
+    {
+      name: 'Learn imagination mastery',
+      id: 'learnImaginationMastery',
+      cost: [[imagination, constant(100)]],
+      reward: [[imaginationMastery, constant(1)]]
     },
     {
       name: 'Play contest',
-      cost: [[codeLines, k(50)]],
+      id: 'playContest',
+      cost: [[codeLines, constant(50)]],
       reward: contestPlayedGainsRating,
       type: linear,
     },
     {
       name: 'Create contest',
-      cost: [[codeLines, k(500)], [ideas, k(5)]],
-      reward: [[money, k(1)], [contribution, c(function(){return contribution.get() * rating.get() / 10000 })]]
+      id: 'createContest',
+      cost: [[codeLines, constant(500)], [ideas, constant(5)]],
+      reward: [[money, constant(1)], [contribution, calculatable(function(){return contribution.get() * contributionMultiplier.get() })]]
     },  
     {
       name: 'Upgrade Cormen',
-      cost: [[money, c(function(){return 1 * Math.pow(cormen.get()+1, 0.37)})]],
-      reward: [[cormen, k(1)]]
+      id: 'upgradeCormen',
+      cost: [[money, calculatable(function(){return 1 * Math.pow(cormen.get()+1, 0.37)})]],
+      reward: [[cormen, constant(1)]]
     },
     {
       name: 'Upgrade keyboard',
-      cost: [[money, c(function(){return 1 * Math.pow(keyboard.get()+1, 0.29)})]],
-      reward: [[keyboard, k(1)]]
+      id: 'upgradeKeyboard',
+      cost: [[money, calculatable(function(){return 1 * Math.pow(keyboard.get()+1, 0.29)})]],
+      reward: [[keyboard, constant(1)]]
     },
     {
       name: 'Ask for help',
-      cost: [[contribution, k(1)]],
-      reward: [[problemHelpedToSolve, k(1)]],
+      id: 'askForHelp',
+      cost: [[contribution, constant(1)]],
+      reward: [[problemHelpedToSolve, constant(1)]],
       type: linear, 
     },
     {
       name: 'Help somebody',
-      cost: [[codeLines, k(11)]],
-      reward: [[contribution, k(1)]],
+      id: 'helpSomebody',
+      cost: [[codeLines, constant(11)]],
+      reward: [[contribution, constant(1)]],
       type: linear,
     },
     {
-      name: 'Tick a second',
+      name: "Advance Second",
+      id: "skip",
       cost: [],
-      reward: [[time, k(1)], [secondTicked, k(1)]],
+      reward: [[secondTicked, constant(1)]],
       type: linear,
       alwaysTopButton: 'off'
     }
@@ -393,79 +330,57 @@ function createContestant(params) {
     return ((event.type == linear) ? buyEvent : unlinearBuyEvent)(event)
   })
   
-  var buyEvents = gameEvents.concat([
-    buyEvent({
-      name: "Advance Second",
-      cost: [],
-      reward: [[secondTicked, k(1)]],
-      type: linear,
-      alwaysTopButton: 'off'
-    }),     
-    buyEvent({
-      name: "Wipe Save",
-      cost: [],
-      reward: [[unpredictableEvent({effect: wipeSave}), k(1)]],
-      type: linear,
-      alwaysTopButton: 'off',
-      upButton: 'off'
-    })  
-  ])
-    
-  contestant = createUnit($.extend({
-
+  var wipeSave = buyEvent({
+    name: "Wipe Save",
+    cost: [],
+    reward: [[unpredictableEvent({effect: wipeSave}), constant(1)]],
+    type: linear,
+    alwaysTopButton: 'off',
+    upButton: 'off'
+  })
+  
+  var playContestButton = $('.playContest')  
+  
+  var currentContest = null
+  
+  playContestButton.click(function() { 
+    if (currentContest != null) {
+      currentContest.remove()
+    }
+    console.log("Started contest")
+    currentContest = createContest()
+  })
+  
+  contestant = {
     paint: function() {
-      //return
-      buttons = []
-      x0 = 250
-      y0 = 10
-      lines = 0
-      resources.forEach(function(resource) {
-        print(large(resource.value), 'end')
-      })
-      x0 = 250
-      y0 = 10
-      lines = 0
-      resources.forEach(function(resource) {
-        print(" " + resource.name)
-      })
-      
-      x0 = 250
-      y0 = 600
-      lines = 0
-      ui_processes.forEach(function(process) {
-        print(signPrefix(process.speed.get()) + large(process.speed.get()), 'end')
-      })
-      
-      x0 = 250
-      y0 = 600
-      lines = 0
-      ui_processes.forEach(function(process) {
-        print(" " + process.value.name + " per second")
-      })
-      
-      x0 = 1000
-      y0 = 10
-      lines = 0
-      buyEvents.forEach(function(buyEvent) {
-        commandButton(buyEvent)
-        print(buyEvent.name + " " + large(buyEvent.zoom) + " times")
-        var delta = buyEvent.delta
-        print(delta.map(function(resource) {
-          return signPrefix(resource.value) + large(resource.value) + " " + resource.name
-        }).join("; "), null, null, 20)
-      })
+      debug.profile('paint')
+      setFormattedText($(".codeLinesPerSecond"), large(secondTicked.getReward(codeLines)))
+      setFormattedText($(".experiencePerProblem"), large(problemSolved.getReward(experience)))
+      setFormattedText($(".ideasPerProblem"), large(ideasPerProblem.get()))
+      setFormattedText($(".ratingQuality"), large(ratingQuality.get()))
+      setTitle($(".codeLinesPerSecond"), "+"+secondTicked.getReward(codeLines)+" per second")
+      resources.each('paint')
+      gameEvents.each('paint')
+      if (currentContest != null) {
+        currentContest.paint()
+      }
+      debug.unprofile('paint')
     },
     tick: function() {
-      var currentTime = new Date().getTime()
+      debug.profile('tick')
+      var currentTime = Date.now()
       var deltaTime = currentTime - savedata.realTime
       secondTicked.run(deltaTime / 1000)
+      if (currentContest != null) {
+        currentContest.tick(deltaTime / 1000)
+      }
       save(currentTime)
+      debug.unprofile('tick')
     },
-    click: function(x, y) {
-      buttons.forEach(function(button) {
-        if (x > button.l && x < button.r && y > button.t && y < button.b) button.onclick()
-      }) 
+    wipeSave: function() {
+      console.log("wipeSave")
+      wipeSave.run(1)
     }
-  }, params))
+  }
   return contestant
 }
