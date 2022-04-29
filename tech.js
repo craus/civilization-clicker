@@ -1,6 +1,7 @@
-tech = function(initialValue, id, params) {
+tech = function(initialValue, id, name, params) {
   var result = variable(initialValue, id, params)
   result = Object.assign(result, {
+    techName: name,
     requirements: [],
     require: function(t) {
       this.requirements.push(t)
@@ -21,7 +22,7 @@ tech = function(initialValue, id, params) {
     createHistoryRow: function(index) {
       var row = instantiate("techHistoryRowSample")
       row.find('.researchedAt').text(Format.time(this.researchedAt))
-      row.find('.name').text(this.id)
+      row.find('.name').text(this.techName)
       row.find('.index').text(index)
       setSortableValue(row.find('.researchedAt'), this.researchedAt)
       $('.techHistory').append(row)
@@ -36,6 +37,8 @@ tech = function(initialValue, id, params) {
       result.createHistoryRow(researchedTechsCount())
     }
   })
+  
+  $('.'+id+' .name').text(result.techName)
   
   if (savedata[id] != undefined) {
     result = Object.assign(result, savedata[id])

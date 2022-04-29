@@ -93,15 +93,15 @@ function createCivilization(params) {
     islands: resources.islands,
   }
   techs = {
-    minerals: tech(0, 'mineralsTech'),
-    farms: tech(0, 'farmsTech'),
-    mines: tech(0, 'minesTech'),
-    marketplaces: tech(0, 'marketplacesTech'),
-    labs: tech(0, 'labsTech'),
-    military: tech(0, 'militaryTech'),
-    happiness: tech(0, 'happinessTech'),
-    circuses: tech(0, 'circusesTech'),
-    barracks: tech(0, 'barracksTech'),
+    minerals: tech(0, 'mineralsTech', 'Geology'),
+    farms: tech(0, 'farmsTech', 'Agriculture'),
+    mines: tech(0, 'minesTech', 'Mining'),
+    marketplaces: tech(0, 'marketplacesTech', 'Economy'),
+    labs: tech(0, 'labsTech', 'Centralized Studies'),
+    military: tech(0, 'militaryTech', 'Military'),
+    happiness: tech(0, 'happinessTech', 'Sociology'),
+    circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
+    barracks: tech(0, 'barracksTech', 'Field Constructions'),
   }
   techs.farms.require(techs.minerals)
   techs.mines.require(techs.minerals)
@@ -110,7 +110,7 @@ function createCivilization(params) {
   techs.circuses.require(techs.happiness)
   techs.circuses.require(techs.minerals)
   
-  Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt < b.researchedAt).forEach((t, i) => t.createHistoryRow(i))
+  Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt < b.researchedAt).forEach((t, i) => t.createHistoryRow(i+1))
   
   resources.science.income = (() => 
     resources.scientists() *
@@ -294,6 +294,10 @@ function createCivilization(params) {
         if (input.contains('Shift')) {
           deltaTime *= 10
         }
+      }
+      if (recentInput.contains('t')) {
+        resources.totalTech.value += 1
+        resources.tech.value += 1
       }
       
       Object.values(resources).each('tick', deltaTime)

@@ -21,6 +21,7 @@ var init = function() {
 
   game = createCivilization()
   input = []
+  recentInput = []
   
   realTime = 0
   var secondTime = 0
@@ -39,6 +40,7 @@ var init = function() {
     if (!debug.paused) {
       game.tick()
       game.paint()
+      recentInput = []
       if (needResort) {
         needResort = false
         $.bootstrapSortable({ applyLast: true })
@@ -50,6 +52,9 @@ var init = function() {
     console.log(e)
     if (!input.contains(e.key)) {
       input.push(e.key)
+    }
+    if (!recentInput.contains(e.key)) {
+      recentInput.push(e.key)
     }
     console.log(input)
   }
