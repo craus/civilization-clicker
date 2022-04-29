@@ -128,6 +128,9 @@
       Technologies
       <span class="label label-default tech value hideIfZero">+?</span>
     </a></li>
+    <li><a data-toggle="tab" href="#history" class="historyTab">
+      History
+    </a></li>
     <li><a data-toggle="tab" href="#military" class="militaryTab">
       Military
       <span class="label label-default conquestPercent">+?</span>
@@ -370,7 +373,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>  
@@ -386,7 +389,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>  
@@ -398,7 +401,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div> 
@@ -410,7 +413,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>
@@ -422,7 +425,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>
@@ -434,7 +437,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>
@@ -446,7 +449,7 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>
@@ -461,13 +464,43 @@
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
-                  <div class="researchedAt"/> seconds
+                  <span class="researchedAt"/> seconds
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <div id="history" class="tab-pane fade">
+      <br>
+      <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-default panel-readiness">
+            <div class="panel-body big right">
+              <span class="name">History</span> 
+            </div>
+          </div>   
+        </div>
+      </div>  
+      <table class="table sortable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tech</th>
+            <th data-defaultsort="asc" scope="col">Invented at</th>
+          </tr>
+        </thead>
+        <tbody class="techHistory">
+          <tr class="hidden techHistoryRowSample">
+            <th scope="row" class="index">#?</th>
+            <td class="name">?</td>
+            <td class="researchedAt">?</td>
+          </tr>
+        </tbody>
+      </table>      
     </div>
     <div id="military" class="tab-pane fade">
       <br>

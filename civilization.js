@@ -109,6 +109,9 @@ function createCivilization(params) {
   techs.labs.require(techs.minerals)
   techs.circuses.require(techs.happiness)
   techs.circuses.require(techs.minerals)
+  
+  Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt < b.researchedAt).forEach((t, i) => t.createHistoryRow(i))
+  
   resources.science.income = (() => 
     resources.scientists() *
     (1+resources.labs()) *
@@ -152,6 +155,8 @@ function createCivilization(params) {
   techCostByTechCount = techCount => 100 * Math.pow(1000, techCount)
   techCost = () => techCostByTechCount(resources.totalTech())
   conquestPenalty = (() => 100*Math.pow(0.5, resources.swamps()) + 2 - Math.pow(2, 1-resources.swamps()))
+  
+  researchedTechsCount = () => Object.values(techs).filter(t => t.value == 1).length
 
   array = ((a, k, z) => a[Math.min(z,a.length-1)]*Math.pow(k,Math.max(0, z-a.length+1)))
   var prod = ((a) => {
@@ -274,6 +279,7 @@ function createCivilization(params) {
       $('.militaryTab').toggle(techs.military()>0)
       $('.conquestsTab').toggle(techs.military()>0)
       $('.techTab').toggle(resources.totalTech()>0)
+      $('.historyTab').toggle(researchedTechsCount()>0)
 
       debug.unprofile('paint')
     },

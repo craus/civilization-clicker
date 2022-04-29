@@ -17,6 +17,14 @@ tech = function(initialValue, id, params) {
         value: this.value,
         researchedAt: this.researchedAt
       }
+    },
+    createHistoryRow: function(index) {
+      var row = instantiate("techHistoryRowSample")
+      row.find('.researchedAt').text(Format.time(this.researchedAt))
+      row.find('.name').text(this.id)
+      row.find('.index').text(index)
+      setSortableValue(row.find('.researchedAt'), this.researchedAt)
+      $('.techHistory').append(row)
     }
   })
   
@@ -25,6 +33,7 @@ tech = function(initialValue, id, params) {
       result.value = 1
       resources.tech.value -= 1
       result.researchedAt = resources.time.value
+      result.createHistoryRow(researchedTechsCount())
     }
   })
   
