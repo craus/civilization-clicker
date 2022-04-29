@@ -1,0 +1,6 @@
+disable conquest button if no conquest ready
+show list of invented techs (and tabs with descriptions)
+  also time of invention
+fix descriptions of lands (x10, not x2)
+too many techs are locked by geology
+
