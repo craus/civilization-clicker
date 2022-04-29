@@ -24,13 +24,11 @@ function createCivilization(params) {
     Object.values(resources).forEach(function(resource) {
       savedata[resource.id] = resource.value
     })
-    Object.values(techs).forEach(function(resource) {
-      savedata[resource.id] = resource.value
-    })
     Object.values(commands).each('save')
+    Object.values(techs).each('save')
     savedata.activeTab = $('.sections>.active>a').attr('href')
     savedata.activeTechTab = $('.techs>.active>a').attr('href')
-    savedata.activeTechTab = $('.areas>.active>a').attr('href')
+    savedata.activeAreaTab = $('.areas>.active>a').attr('href')
     savedata.realTime = timestamp || Date.now()
     localStorage[saveName] = JSON.stringify(savedata)
   } 
@@ -242,14 +240,6 @@ function createCivilization(params) {
     }))
   }
   
-  Object.values(techs).forEach(function(t) {
-    $('.#{0} .pick'.i(t.id)).click(() => {
-      if (t.value != 1 && resources.tech.value >= 1) {
-        t.value = 1
-        resources.tech.value -= 1
-      }
-    })
-  })
   Object.values(areas).forEach(function(area) {
     $('.#{0}Conquest .conquest'.i(area.id)).click(() => {
       if (resources.conquests.value >= 1) {
