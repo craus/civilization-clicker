@@ -335,32 +335,37 @@
     <div id="tech" class="tab-pane fade">
       <br>
       <div class="row">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">
-          <div class="panel panel-default panel-readiness">
-            <div class="panel-body big right">
-              <span class="name">Tech points:</span> 
-              <span class="tech value">?</span> 
-            </div>
-          </div>   
-        </div>
-      </div>
- 
-      <div class="row">
-        <div class="col-sm-2">
-          <ul class="nav nav-pills nav-stacked techs">
-            <li><a data-toggle="tab" href="#minerals" class="mineralsTechUnlocked">Geology</a></li>
-            <li><a data-toggle="tab" href="#sociology" class="happinessTechUnlocked">Sociology</a></li>
-            <li><a data-toggle="tab" href="#circuses" class="circusesTechUnlocked">Applied Entertainment</a></li>
-            <li><a data-toggle="tab" href="#farms" class="farmsTechUnlocked">Agriculture</a></li>
-            <li><a data-toggle="tab" href="#mines" class="minesTechUnlocked">Mining</a></li>
-            <li><a data-toggle="tab" href="#marketplaces" class="marketplacesTechUnlocked">Economy</a></li>
-            <li><a data-toggle="tab" href="#labs" class="labsTechUnlocked">Labs</a></li>
-            <li><a data-toggle="tab" href="#militaryTech" class="militaryTechUnlocked">Military</a></li>
+        <div class="col-sm-3">
+          <ul class="nav nav-tabs sections techSubsets">
+            <li><a data-toggle="tab" href="#availableTechs">Available</a></li>
+            <li><a data-toggle="tab" href="#researchedTechs">Researched</a></li>
           </ul>
+          <br>
+          <ul class="nav nav-pills nav-stacked techs techSubset available">
+            <li class="mineralsTech"><a data-toggle="tab" href="#minerals">Geology</a></li>
+            <li class="happinessTech"><a data-toggle="tab" href="#sociology">Sociology</a></li>
+            <li class="circusesTech"><a data-toggle="tab" href="#circuses">Applied Entertainment</a></li>
+            <li class="farmsTech"><a data-toggle="tab" href="#farms">Agriculture</a></li>
+            <li class="minesTech"><a data-toggle="tab" href="#mines">Mining</a></li>
+            <li class="marketplacesTech"><a data-toggle="tab" href="#marketplaces">Economy</a></li>
+            <li class="labsTech"><a data-toggle="tab" href="#labs">Labs</a></li>
+            <li class="militaryTech"><a data-toggle="tab" href="#militaryTech">Military</a></li>
+          </ul>    
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
+          <br>
+          <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+              <div class="panel panel-default panel-readiness">
+                <div class="panel-body big right">
+                  <span class="name">Tech points:</span> 
+                  <span class="tech value">?</span> 
+                </div>
+              </div>   
+            </div>
+          </div>  
           <div class="tab-content">
             <div id="minerals" class="tab-pane mineralsTech fade">
               <h3 class="name">Geology</h3>

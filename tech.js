@@ -6,12 +6,23 @@ tech = function(initialValue, id, name, params) {
     require: function(t) {
       this.requirements.push(t)
     },
+    available: function() {
+      return this.requirements.every(r => r() > 0)
+    },
+    researched: function() {
+      return this.value == 1
+    },
     paint: function() {
-      $('.'+id+'Unlocked').toggle(this.requirements.every(r => r() > 0))
+      $('.techs .'+id).toggle(
+        this.available() && !this.researched() && show.availableTechs || 
+        this.researched() && show.researchedTechs
+      )
       $('.'+id+'Required').toggle(this.value == 1)
       $('.'+id+' .pick').toggle(this.value == 0)
       $('.'+id+' .picked').toggle(this.value == 1)
       $('.'+id+' .researchedAt').text(Format.time(this.researchedAt))
+      $('.techs .'+id).toggleClass('available', result.value == 0)
+      $('.techs .'+id).toggleClass('researched', result.value == 1)      
     },
     save: function() {
       savedata[id] = {
@@ -26,15 +37,19 @@ tech = function(initialValue, id, name, params) {
       row.find('.index').text(index)
       setSortableValue(row.find('.researchedAt'), this.researchedAt)
       $('.techHistory').append(row)
+    },
+    research: function() {
+      this.value = 1
+      this.researchedAt = resources.time.value
+      this.createHistoryRow(researchedTechsCount()) 
+      $('.techs .'+id).appendTo($('.researchedTechs'))
     }
   })
   
   $('.'+id+' .pick').click(() => {
     if (result.value != 1 && resources.tech.value >= 1) {
-      result.value = 1
       resources.tech.value -= 1
-      result.researchedAt = resources.time.value
-      result.createHistoryRow(researchedTechsCount())
+      result.research()
     }
   })
   
