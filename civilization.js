@@ -28,6 +28,7 @@ function createCivilization(params) {
     Object.values(techs).each('save')
     savedata.activeTab = $('.sections>.active>a').attr('href')
     savedata.activeTechTab = $('.techs>.active>a').attr('href')
+    savedata.activeTechSubsetTab = $('.techSubsets>.active>a').attr('href')
     savedata.activeAreaTab = $('.areas>.active>a').attr('href')
     savedata.realTime = timestamp || Date.now()
     localStorage[saveName] = JSON.stringify(savedata)
@@ -258,10 +259,12 @@ function createCivilization(params) {
   })
   
   savedata.activeTab = savedata.activeTab || '#population'
+  savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   
   $('a[href="' + savedata.activeTab + '"]').tab('show')
   $('a[href="' + savedata.activeTechTab + '"]').tab('show')
   $('a[href="' + savedata.activeAreaTab + '"]').tab('show')
+  $('a[href="' + savedata.activeTechSubsetTab + '"]').tab('show')
   
   civilization = {
     paint: function() {
