@@ -6,12 +6,23 @@ tech = function(initialValue, id, name, params) {
     require: function(t) {
       this.requirements.push(t)
     },
+    available: function() {
+      return this.requirements.every(r => r() > 0)
+    },
+    researched: function() {
+      return this.value == 1
+    },
     paint: function() {
-      $('.techs .'+id).toggle(this.requirements.every(r => r() > 0))
+      $('.techs .'+id).toggle(
+        this.available() && !this.researched() && show.availableTechs || 
+        this.researched() && show.researchedTechs
+      )
       $('.'+id+'Required').toggle(this.value == 1)
       $('.'+id+' .pick').toggle(this.value == 0)
       $('.'+id+' .picked').toggle(this.value == 1)
       $('.'+id+' .researchedAt').text(Format.time(this.researchedAt))
+      $('.techs .'+id).toggleClass('available', result.value == 0)
+      $('.techs .'+id).toggleClass('researched', result.value == 1)      
     },
     save: function() {
       savedata[id] = {
@@ -46,13 +57,6 @@ tech = function(initialValue, id, name, params) {
   
   if (savedata[id] != undefined) {
     result = Object.assign(result, savedata[id])
-  }
-  
-  if (result.value == 1) {
-    console.log(result.techName, result.value)
-    $('.techs .'+id).appendTo($('.researchedTechsList'))
-  } else {
-    console.log(result.techName, result.value)
   }
   
   return result

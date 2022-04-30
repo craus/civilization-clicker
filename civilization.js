@@ -21,6 +21,7 @@ function createCivilization(params) {
       return
     }
     savedata = {} 
+    savedata.show = show
     Object.values(resources).forEach(function(resource) {
       savedata[resource.id] = resource.value
     })
@@ -261,10 +262,24 @@ function createCivilization(params) {
   savedata.activeTab = savedata.activeTab || '#population'
   savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   
+  show = savedata.show || {
+    availableTechs: true,
+    researchedTechs: false
+  }
+  
   $('a[href="' + savedata.activeTab + '"]').tab('show')
   $('a[href="' + savedata.activeTechTab + '"]').tab('show')
   $('a[href="' + savedata.activeAreaTab + '"]').tab('show')
   $('a[href="' + savedata.activeTechSubsetTab + '"]').tab('show')
+  
+  $('a[href="#availableTechs"]').click(() => { 
+    show.availableTechs = true
+    show.researchedTechs = false
+  })
+  $('a[href="#researchedTechs"]').click(() => { 
+    show.availableTechs = false
+    show.researchedTechs = true
+  })  
   
   civilization = {
     paint: function() {
