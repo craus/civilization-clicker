@@ -9,6 +9,9 @@ tech = function(initialValue, id, name, params) {
     available: function() {
       return this.requirements.every(r => r() > 0)
     },
+    affordable: function() {
+      return resources.tech.value >= 1;
+    },
     researched: function() {
       return this.value == 1
     },
@@ -23,6 +26,8 @@ tech = function(initialValue, id, name, params) {
       $('.'+id+' .researchedAt').text(Format.time(this.researchedAt))
       $('.techs .'+id).toggleClass('available', result.value == 0)
       $('.techs .'+id).toggleClass('researched', result.value == 1)      
+      $('.pick').prop('disabled', !this.affordable())
+      $('.pick').toggleClass('nohover', !this.affordable())
     },
     save: function() {
       savedata[id] = {
