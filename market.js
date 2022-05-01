@@ -19,7 +19,6 @@ function market(id, generateDeal)
     decline: function() {
       if (!this.declinable()) return
       this.level -= 1
-      resources.commands.value -= 1
       this.generateNewDeal()
     },
     generateNewDeal: function() {
@@ -29,7 +28,7 @@ function market(id, generateDeal)
       return resources.commands() >= 1 && Object.entries(this.deal).every(c => resources[c[0]].value >= -c[1])
     },
     declinable: function() {
-      return resources.commands() >= 1 && this.level >= 1
+      return this.level >= 1
     },
     paint: function() {
       panel.find('.level').text(this.level)

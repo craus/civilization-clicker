@@ -207,10 +207,10 @@ function createCivilization(params) {
     scientistsMarket: market('scientists', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'scientists',
-      zoomFrom: z,
+      zoomFrom: 0.5 * z,
       zoomTo: z => 0.813*Math.pow(z, 0.9),
-      qualitySpread: 1,
-      zoomSpread: 1
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
     }))
   }
   
