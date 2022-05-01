@@ -26,6 +26,7 @@ function createCivilization(params) {
       savedata[resource.id] = resource.value
     })
     Object.values(commands).each('save')
+    Object.values(markets).each('save')
     Object.values(techs).each('save')
     savedata.activeTab = $('.sections>.active>a').attr('href')
     savedata.activeTechTab = $('.techs>.active>a').attr('href')
@@ -155,7 +156,7 @@ function createCivilization(params) {
     return Math.floor(round(Math.pow(10, p), 2))
   }
   
-  var approx = p => Math.floor(round(p, 2))
+  approx = p => Math.floor(round(p, 2))
   
   techCostByTechCount = techCount => 100 * Math.pow(1000, techCount)
   techCost = () => techCostByTechCount(resources.totalTech())
@@ -202,11 +203,22 @@ function createCivilization(params) {
     return div(res)
   })
   
+  markets = {
+    scientistsMarket: market('scientists', z => rand.deal({
+      resourceFrom: 'money',
+      resourceTo: 'scientists',
+      zoomFrom: z,
+      zoomTo: z => 0.813*Math.pow(z, 0.9),
+      qualitySpread: 1,
+      zoomSpread: 1
+    }))
+  }
+  
   commands = {
     hireScientists: command('hireScientists', z => ({
       commands: -1,
       money: -Math.pow(10, z),
-      scientists: +approx(Math.pow(10, 0.813*Math.pow(z, 0.9)))
+      scientists: +approx(Math.pow(10, ))
     })),
     hireSoldiers: command('hireSoldiers', z => ({
       commands: -1,
@@ -220,8 +232,8 @@ function createCivilization(params) {
     })),
     buildFarms: command('buildFarms', z => ({
       commands: -1,
-      minerals: -1e4*Math.pow(10, z),
-      farms: +arc(0.87*Math.pow(z, 0.6))
+      minerals: -1e3*Math.pow(10, z),
+      farms: +arc(0.87*Math.pow(z, 0.8))
     })),
     organizeCelebrations: command('organizeCelebrations', z => ({
       commands: -1,
@@ -259,6 +271,8 @@ function createCivilization(params) {
     })
   })
   
+  bot = createBot()
+  
   savedata.activeTab = savedata.activeTab || '#population'
   savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   
@@ -279,7 +293,7 @@ function createCivilization(params) {
   $('a[href="#researchedTechs"]').click(() => { 
     show.availableTechs = false
     show.researchedTechs = true
-  })  
+  }) 
   
   civilization = {
     paint: function() {
@@ -288,6 +302,7 @@ function createCivilization(params) {
       Object.values(resources).each('paint')
       Object.values(techs).each('paint')
       Object.values(commands).each('paint')
+      Object.values(markets).each('paint')
       setFormattedText($('.populationIncome'), noZero(signed(0)))
       setFormattedText($('.techCost'), large(techCost()))
       setFormattedText($('.conquestPenalty'), large(conquestPenalty()))
@@ -303,6 +318,22 @@ function createCivilization(params) {
       $('.historyTab').toggle(researchedTechsCount()>0)
 
       debug.unprofile('paint')
+    },
+    tickTime: function(deltaTime) {
+      Object.values(resources).each('tick', deltaTime)
+      resources.commands.value += deltaTime * 0.1
+      //resources.commands.value = Math.min(10, resources.commands.value)
+      
+      while (resources.science() > techCost()) {
+        resources.science.value -= techCost()
+        resources.totalTech.value += 1
+        resources.tech.value += 1
+      }
+      while (resources.warpower() > resources.conquestCost()) {
+        resources.warpower.value -= resources.conquestCost()
+        resources.conquestCost.value *= conquestPenalty()
+        resources.conquests.value += 1
+      }      
     },
     tick: function() {
       if (resources.conquestCost.value < 100) resources.conquestCost.value = 100
@@ -321,20 +352,8 @@ function createCivilization(params) {
         resources.tech.value += 1
       }
       
-      Object.values(resources).each('tick', deltaTime)
-      resources.commands.value += deltaTime * 0.1
-      //resources.commands.value = Math.min(10, resources.commands.value)
-      
-      while (resources.science() > techCost()) {
-        resources.science.value -= techCost()
-        resources.totalTech.value += 1
-        resources.tech.value += 1
-      }
-      while (resources.warpower() > resources.conquestCost()) {
-        resources.warpower.value -= resources.conquestCost()
-        resources.conquestCost.value *= conquestPenalty()
-        resources.conquests.value += 1
-      }
+      this.tickTime(deltaTime)
+      bot.tick(deltaTime)
       
       save(currentTime)
       debug.unprofile('tick')

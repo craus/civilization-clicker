@@ -14,3 +14,7 @@ if (!Object.entries) {
 		return reduce(keys(O), (e, k) => concat(e, typeof k === 'string' && isEnumerable(O, k) ? [[k, O[k]]] : []), []);
 	};
 }
+
+(() => {
+  Math.clamp = (x, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFINITY) => Math.max(min, Math.min(max, x))
+})()

@@ -19,11 +19,7 @@ function command(id, change)
       runChange(change(zoom))
     },
     check: function(zoom){
-      var c = change(zoom)
-      runChange(c)
-      var result = Object.keys(c).every(r => resources[r].value >= 0)
-      runChange(c, -1)
-      return result
+      return Object.entries(change(zoom)).every(c => resources[c[0]].value >= -c[1])
     },
     use: function() {
       if (!this.canUse()) {

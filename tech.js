@@ -48,14 +48,17 @@ tech = function(initialValue, id, name, params) {
       this.researchedAt = resources.time.value
       this.createHistoryRow(researchedTechsCount()) 
       $('.techs .'+id).appendTo($('.researchedTechs'))
+    },
+    buyResearch: function() {
+      if (this.available() && this.affordable() && !this.researched()) {
+        resources.tech.value -= 1
+        this.research()
+      }      
     }
   })
   
   $('.'+id+' .pick').click(() => {
-    if (result.value != 1 && resources.tech.value >= 1) {
-      resources.tech.value -= 1
-      result.research()
-    }
+    result.buyResearch()
   })
   
   $('.'+id+' .name').text(result.techName)
