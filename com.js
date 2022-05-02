@@ -159,6 +159,12 @@ function enable(el, on) {
     el.tooltip('hide')
   }
 }
+  
+arc = function(p) {
+  return Math.floor(round(Math.pow(10, p), 2))
+}
+
+approx = p => Math.floor(round(p, 2))
 
 sign = function(x) { 
   if (x == null) return null

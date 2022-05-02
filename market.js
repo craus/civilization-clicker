@@ -63,3 +63,80 @@ function market(id, generateDeal)
   
   return result
 }
+
+function createAllMarkets() {
+  return {
+    scientists: market('scientists', z => rand.deal({
+      resourceFrom: 'money',
+      resourceTo: 'scientists',
+      zoomFrom: 0.5 * z,
+      zoomTo: z => 0.813*Math.pow(z, 0.9),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    houses: market('houses', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'population',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.774*Math.pow(z, 0.8),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    mines: market('mines', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'mines',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.574*Math.pow(z, 0.7),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    soldiers: market('soldiers', z => rand.deal({
+      resourceFrom: 'money',
+      resourceTo: 'soldiers',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 2*Math.pow(z, 0.5),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    farms: market('farms', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'farms',
+      zoomFrom: 0.5 * z + 3,
+      zoomTo: z => 0.87*Math.pow(z, 0.8),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    celebrations: market('celebrations', z => rand.deal({
+      resourceFrom: 'money',
+      resourceTo: 'happiness',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.521*Math.pow(z, 0.7),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    circuses: market('circuses', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'circuses',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => arc(0.574*Math.pow(z, 0.7)),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    marketplaces: market('marketplaces', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'marketplaces',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.574*Math.pow(z, 0.75),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    labs: market('labs', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'labs',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.574*Math.pow(z, 0.6),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    }))
+  }
+}

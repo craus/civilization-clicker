@@ -69,3 +69,32 @@ tech = function(initialValue, id, name, params) {
   
   return result
 }  
+
+function createAllTechs() {
+  techs = {
+    minerals: tech(0, 'mineralsTech', 'Geology'),
+    farms: tech(0, 'farmsTech', 'Agriculture'),
+    mines: tech(0, 'minesTech', 'Mining'),
+    marketplaces: tech(0, 'marketplacesTech', 'Economy'),
+    labs: tech(0, 'labsTech', 'Centralized Studies'),
+    military: tech(0, 'militaryTech', 'Military'),
+    happiness: tech(0, 'happinessTech', 'Sociology'),
+    circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
+    //barracks: tech(0, 'barracksTech', 'Field Constructions'),
+    win: tech(0, 'winTech', 'Interplanet Colonization')
+  }
+  
+  techs.farms.require(techs.minerals)
+  techs.mines.require(techs.minerals)
+  techs.marketplaces.require(techs.minerals)
+  techs.labs.require(techs.minerals)
+  techs.circuses.require(techs.happiness)
+  techs.circuses.require(techs.minerals)
+  techs.circuses.require(techs.minerals)
+  
+  Object.values(techs).forEach(t => {if (t != techs.win) techs.win.require(t)})
+  
+  Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt - b.researchedAt).forEach((t, i) => t.createHistoryRow(i+1))
+  
+  return techs
+}

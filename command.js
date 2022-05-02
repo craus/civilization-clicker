@@ -93,3 +93,53 @@ function command(id, change)
   
   return result
 }
+
+function createAllCommands() {
+  return {
+    hireScientists: command('hireScientists', z => ({
+      commands: -1,
+      money: -Math.pow(10, z),
+      scientists: +approx(Math.pow(10, 0.813*Math.pow(z, 0.9)))
+    })),
+    hireSoldiers: command('hireSoldiers', z => ({
+      commands: -1,
+      money: -Math.pow(10, z),
+      soldiers: +arc(2*Math.pow(z, 0.5))
+    })),
+    buildHouses: command('buildHouses', z => ({
+      commands: -1,
+      minerals: -10*Math.pow(10, z),
+      population: +arc(0.774*Math.pow(z, 0.8))
+    })),
+    buildFarms: command('buildFarms', z => ({
+      commands: -1,
+      minerals: -1e3*Math.pow(10, z),
+      farms: +arc(0.87*Math.pow(z, 0.8))
+    })),
+    organizeCelebrations: command('organizeCelebrations', z => ({
+      commands: -1,
+      money: -10*Math.pow(10, z),
+      happiness: +arc(0.521*Math.pow(z, 0.7))
+    })),
+    buildCircuses: command('buildCircuses', z => ({
+      commands: -1,
+      minerals: -10*Math.pow(10, z),
+      circuses: +Math.floor(arc(0.583*Math.pow(z, 0.6)))
+    })),
+    buildMines: command('buildMines', z => ({
+      commands: -1,
+      minerals: -10*Math.pow(10, z),
+      mines: +arc(0.574*Math.pow(z, 0.7))
+    })),
+    buildMarketplaces: command('buildMarketplaces', z => ({
+      commands: -1,
+      minerals: -10*Math.pow(10, z),
+      marketplaces: +arc(0.574*Math.pow(z, 0.75))
+    })),
+    buildLabs: command('buildLabs', z => ({
+      commands: -1,
+      minerals: -10*Math.pow(10, z),
+      labs: +arc(0.574*Math.pow(z, 0.6))
+    }))
+  }
+}
