@@ -12,7 +12,7 @@ function market(id, generateDeal)
     deal: null,
     accept: function() {
       if (!this.affordable()) return
-      Object.entries(this.deal.change).forEach(c => resources[c[0]].value += c[1]())
+      Object.entries(this.deal.change).forEach(c => resources[c[0]].value += c[1])
       this.level += 1
       if (this.level > this.maxLevel) {
         this.maxLevel = this.level
@@ -31,7 +31,7 @@ function market(id, generateDeal)
       this.deal = generateDeal(this.level)
     },
     affordable: function() {
-      return resources.commands() >= 1 && Object.entries(this.deal.change).every(c => resources[c[0]].value >= -c[1]())
+      return resources.commands() >= 1 && Object.entries(this.deal.change).every(c => resources[c[0]].value >= -c[1])
     },
     declinable: function() {
       return this.level >= 1
@@ -41,7 +41,7 @@ function market(id, generateDeal)
       decline.toggleClass('disabled', !this.declinable())
       accept.toggleClass('disabled', !this.affordable())
       Object.entries(this.deal.change).forEach(c => {
-        setFormattedText(panel.find('.#{0}'.i(c[0])), large(Math.abs(c[1]())))
+        setFormattedText(panel.find('.#{0}'.i(c[0])), large(Math.abs(c[1])))
       })
     },
     save: function() {
@@ -83,7 +83,7 @@ function createAllMarkets() {
     houses: market('houses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'population',
-      zoomFrom: 0.5 * z + 1,
+      zoomFrom: 0.5 * z + 0.5,
       zoomTo: z => 0.774*Math.pow(z, 0.8),
       qualitySpread: 0.5,
       zoomSpread: 0.5

@@ -68,7 +68,7 @@ function createAllResources() {
   resources.science.income = (() => 
     resources.scientists() *
     (1+resources.labs()) *
-    (1+resources.happiness()) *
+    (1+techs.scientistsGuild() * resources.happiness()) *
     (Math.pow(30, resources.islands()))
   ) 
   resources.money.income = (() => 
@@ -81,7 +81,7 @@ function createAllResources() {
     techs.minerals() * 
     resources.population() *
     (1+resources.mines()) *
-    (1+resources.happiness()) *
+    (1+techs.minersGuild() * resources.happiness()) *
     (Math.pow(100, resources.mountains()))
   )  
   resources.happiness.income = (() => 
@@ -99,8 +99,7 @@ function createAllResources() {
   resources.time.income = (() => 1)
   resources.idleTime.income = (() => 1)
   
-  techCostByTechCount = techCount => 1000 * Math.pow(10000, techCount) * Math.pow(10, 0.4 * techCount)
-  techCost = () => techCostByTechCount(resources.totalTech())
+
   conquestPenalty = (() => 100)
   
   researchedTechsCount = () => Object.values(techs).filter(t => t.value == 1).length

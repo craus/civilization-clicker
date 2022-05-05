@@ -40,8 +40,8 @@
       result.zoomTo = result.baseZoomTo + rand.normal() * result.qualitySpread
       
       result.change = {}
-      result.change[params.resourceFrom] = () => -Math.clamp(approx(Math.pow(10, result.zoomFrom)), 1)
-      result.change[params.resourceTo] = () => +Math.clamp(approx(Math.pow(10, result.zoomTo)), 1)
+      result.change[params.resourceFrom] = -Math.clamp(approx(Math.pow(10, result.zoomFrom)), 1)
+      result.change[params.resourceTo] = +Math.clamp(approx(Math.pow(10, result.zoomTo)), 1)
       
       console.log(result)
       return result

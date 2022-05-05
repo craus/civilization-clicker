@@ -486,6 +486,8 @@
           <ul class="nav nav-pills nav-stacked techs techSubset available">
             <li class="mineralsTech"><a data-toggle="tab" href="#minerals">Geology</a></li>
             <li class="happinessTech"><a data-toggle="tab" href="#sociology">Sociology</a></li>
+            <li class="minersGuildTech"><a data-toggle="tab" href="#minersGuild">Miners Guild</a></li>
+            <li class="scientistsGuildTech"><a data-toggle="tab" href="#scientistsGuild">Scientists Guild</a></li>
             <li class="circusesTech"><a data-toggle="tab" href="#circuses">Applied Entertainment</a></li>
             <li class="farmsTech"><a data-toggle="tab" href="#farms">Agriculture</a></li>
             <li class="minesTech"><a data-toggle="tab" href="#mines">Mining</a></li>
@@ -526,14 +528,36 @@
               </div>
             </div>  
             <div id="sociology" class="tab-pane happinessTech fade">
-              <h3 class="name">Happiness</h3>
+              <h3 class="name">Sociology</h3>
               <p><i><small>People work better when you understand how they do.</small></i></p>
               <p>Unlocks concept of <i>happiness</i>: the happier your people are, the faster they work. </p>
-              <p>Your money, minerals and research income is multiplied by (1 + Happiness).</p>
+              <p>Your money income is multiplied by (1 + Happiness).</p>
               <br>
               <p><i><small>Have a happy holiday!</small></i></p>
               <p>Allows to organize celebrations at a cost of money.</p>
               <p>Each celebration gives +1 happiness.</p>
+              <div class="row centered">
+                <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
+                <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
+                  <span class="researchedAt"/> seconds
+                </button>
+              </div>
+            </div>  
+            <div id="minersGuild" class="tab-pane minersGuildTech fade">
+              <h3 class="name">Miners Guild</h3>
+              <p><i><small>Centralized organization of all who loves mining.</small></i></p>
+              <p>With this, your minerals income is multiplied by (1 + Happiness).</p>
+              <div class="row centered">
+                <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
+                <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
+                  <span class="researchedAt"/> seconds
+                </button>
+              </div>
+            </div>  
+            <div id="scientistsGuild" class="tab-pane scientistsGuildTech fade">
+              <h3 class="name">Scientists Guild</h3>
+              <p><i><small>Centralized organization of all who loves science.</small></i></p>
+              <p>With this, your science income is multiplied by (1 + Happiness).</p>
               <div class="row centered">
                 <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
                 <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at

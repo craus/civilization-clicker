@@ -79,6 +79,8 @@ function createAllTechs() {
     labs: tech(0, 'labsTech', 'Centralized Studies'),
     military: tech(0, 'militaryTech', 'Military'),
     happiness: tech(0, 'happinessTech', 'Sociology'),
+    minersGuild: tech(0, 'minersGuildTech', 'Miners Guild'),
+    scientistsGuild: tech(0, 'scientistsGuildTech', 'Scientists Guild'),
     circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
     //barracks: tech(0, 'barracksTech', 'Field Constructions'),
     win: tech(0, 'winTech', 'Interplanet Colonization')
@@ -91,10 +93,16 @@ function createAllTechs() {
   techs.circuses.require(techs.happiness)
   techs.circuses.require(techs.minerals)
   techs.circuses.require(techs.minerals)
+  techs.minersGuild.require(techs.happiness)
+  techs.minersGuild.require(techs.minerals)
+  techs.scientistsGuild.require(techs.happiness)
   
   Object.values(techs).forEach(t => {if (t != techs.win) techs.win.require(t)})
   
   Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt - b.researchedAt).forEach((t, i) => t.createHistoryRow(i+1))
+  
+  techCostByTechCount = techCount => approx(1000 * Math.pow(10000, techCount))
+  techCost = () => techCostByTechCount(resources.totalTech())
   
   return techs
 }
