@@ -7,13 +7,19 @@ function market(id, generateDeal)
   var decline = panel.find('.decline')
   
   var result = $.extend({
-    level: 1,
+    level: 0,
+    maxLevel: 0,
     deal: null,
     accept: function() {
       if (!this.affordable()) return
-      Object.entries(this.deal).forEach(c => resources[c[0]].value += c[1])
+      Object.entries(this.deal.change).forEach(c => resources[c[0]].value += c[1]())
       this.level += 1
+      if (this.level > this.maxLevel) {
+        this.maxLevel = this.level
+        resources.commands.value += 1
+      } 
       resources.commands.value -= 1
+      resources.idleTime.value = 0
       this.generateNewDeal()
     },
     decline: function() {
@@ -25,7 +31,7 @@ function market(id, generateDeal)
       this.deal = generateDeal(this.level)
     },
     affordable: function() {
-      return resources.commands() >= 1 && Object.entries(this.deal).every(c => resources[c[0]].value >= -c[1])
+      return resources.commands() >= 1 && Object.entries(this.deal.change).every(c => resources[c[0]].value >= -c[1]())
     },
     declinable: function() {
       return this.level >= 1
@@ -34,8 +40,8 @@ function market(id, generateDeal)
       panel.find('.level').text(this.level)
       decline.toggleClass('disabled', !this.declinable())
       accept.toggleClass('disabled', !this.affordable())
-      Object.entries(this.deal).forEach(c => {
-        setFormattedText(panel.find('.#{0}'.i(c[0])), large(Math.abs(c[1])))
+      Object.entries(this.deal.change).forEach(c => {
+        setFormattedText(panel.find('.#{0}'.i(c[0])), large(Math.abs(c[1]())))
       })
     },
     save: function() {
@@ -69,7 +75,7 @@ function createAllMarkets() {
     scientists: market('scientists', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'scientists',
-      zoomFrom: 0.5 * z,
+      zoomFrom: 0.5 * z + 0.3,
       zoomTo: z => 0.813*Math.pow(z, 0.9),
       qualitySpread: 0.5,
       zoomSpread: 0.5
@@ -117,8 +123,8 @@ function createAllMarkets() {
     circuses: market('circuses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'circuses',
-      zoomFrom: 0.5 * z + 1,
-      zoomTo: z => arc(0.574*Math.pow(z, 0.7)),
+      zoomFrom: 0.5 * z + 3,
+      zoomTo: z => 0.574*Math.pow(z, 0.7),
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),

@@ -38,7 +38,7 @@ var createBot = function() {
   
   return {
     tick: function(t) {
-      return
+      return // disable bot
       useMax(commands.buildHouses)
       useMax(commands.hireScientists)
       research()

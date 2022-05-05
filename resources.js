@@ -1,6 +1,7 @@
 function createAllResources() {
   resources = {
     time: variable(0, 'time', {formatter: Format.time}),
+    idleTime: variable(0, 'idleTime'),
     money: variable(0, 'money'),
     population: variable(1, 'population'),
     science: variable(0, 'science'),
@@ -53,26 +54,35 @@ function createAllResources() {
     forests: resources.forests,
     islands: resources.islands,
   }
+  Object.values(areas).forEach(function(area) {
+    $('.#{0}Conquest .conquest'.i(area.id)).click(() => {
+      if (resources.conquests.value >= 1) {
+        area.value += 1
+        resources.conquests.value -= 1
+      }
+    })
+  })
+  
   techs = createAllTechs()
 
   resources.science.income = (() => 
     resources.scientists() *
     (1+resources.labs()) *
     (1+resources.happiness()) *
-    (Math.pow(10, resources.islands()))
+    (Math.pow(30, resources.islands()))
   ) 
   resources.money.income = (() => 
     resources.population() *
     (1+resources.marketplaces()) *
     (1+resources.happiness()) *
-    (Math.pow(10, resources.forests()))
+    (Math.pow(100, resources.forests()))
   )
   resources.minerals.income = (() => 
     techs.minerals() * 
     resources.population() *
     (1+resources.mines()) *
     (1+resources.happiness()) *
-    (Math.pow(10, resources.mountains()))
+    (Math.pow(100, resources.mountains()))
   )  
   resources.happiness.income = (() => 
     resources.circuses()
@@ -87,11 +97,11 @@ function createAllResources() {
     (Math.pow(10, resources.planes()))
   )
   resources.time.income = (() => 1)
+  resources.idleTime.income = (() => 1)
   
-  
-  techCostByTechCount = techCount => 100 * Math.pow(1000, techCount)
+  techCostByTechCount = techCount => 1000 * Math.pow(10000, techCount) * Math.pow(10, 0.4 * techCount)
   techCost = () => techCostByTechCount(resources.totalTech())
-  conquestPenalty = (() => 100*Math.pow(0.5, resources.swamps()) + 2 - Math.pow(2, 1-resources.swamps()))
+  conquestPenalty = (() => 100)
   
   researchedTechsCount = () => Object.values(techs).filter(t => t.value == 1).length
 }

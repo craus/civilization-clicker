@@ -48,15 +48,6 @@ function createCivilization(params) {
   
   commands = createAllCommands()
   
-  Object.values(areas).forEach(function(area) {
-    $('.#{0}Conquest .conquest'.i(area.id)).click(() => {
-      if (resources.conquests.value >= 1) {
-        area.value += 1
-        resources.conquests.value -= 1
-      }
-    })
-  })
-  
   bot = createBot()
   
   savedata.activeTab = savedata.activeTab || '#population'
@@ -107,7 +98,7 @@ function createCivilization(params) {
     },
     tickTime: function(deltaTime) {
       Object.values(resources).each('tick', deltaTime)
-      resources.commands.value += deltaTime * 0.1
+      resources.commands.value += deltaTime * 0.2
       //resources.commands.value = Math.min(10, resources.commands.value)
       
       while (resources.science() > techCost()) {
