@@ -98,7 +98,7 @@ function createCivilization(params) {
     },
     tickTime: function(deltaTime) {
       Object.values(resources).each('tick', deltaTime)
-      resources.commands.value += deltaTime * 0.2
+      resources.commands.value += deltaTime * 0.1
       //resources.commands.value = Math.min(10, resources.commands.value)
       
       while (resources.science() > techCost()) {

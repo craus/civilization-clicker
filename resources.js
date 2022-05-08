@@ -69,7 +69,7 @@ function createAllResources() {
     resources.scientists() *
     (1+resources.labs()) *
     (1+techs.scientistsGuild() * resources.happiness()) *
-    (Math.pow(30, resources.islands()))
+    (Math.pow(10, resources.islands()))
   ) 
   resources.money.income = (() => 
     resources.population() *

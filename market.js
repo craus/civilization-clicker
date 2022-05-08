@@ -108,7 +108,7 @@ function createAllMarkets() {
       resourceFrom: 'minerals',
       resourceTo: 'farms',
       zoomFrom: 0.5 * z + 3,
-      zoomTo: z => 0.87*Math.pow(z, 0.8),
+      zoomTo: z => 0.9*Math.pow(z, 0.8),
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
@@ -140,7 +140,7 @@ function createAllMarkets() {
       resourceFrom: 'minerals',
       resourceTo: 'labs',
       zoomFrom: 0.5 * z + 1,
-      zoomTo: z => 0.574*Math.pow(z, 0.6),
+      zoomTo: z => 0.574*Math.pow(z, 0.55),
       qualitySpread: 0.5,
       zoomSpread: 0.5
     }))
