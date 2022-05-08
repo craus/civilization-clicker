@@ -75,7 +75,7 @@ function createAllResources() {
     resources.population() *
     (1+resources.marketplaces()) *
     (1+resources.happiness()) *
-    (Math.pow(100, resources.forests()))
+    (Math.pow(30, resources.forests()))
   )
   resources.minerals.income = (() => 
     techs.minerals() * 

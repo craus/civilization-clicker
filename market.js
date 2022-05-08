@@ -116,7 +116,7 @@ function createAllMarkets() {
       resourceFrom: 'money',
       resourceTo: 'happiness',
       zoomFrom: 0.5 * z + 1,
-      zoomTo: z => 0.521*Math.pow(z, 0.7),
+      zoomTo: z => 0.521*Math.pow(z, 0.75),
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
