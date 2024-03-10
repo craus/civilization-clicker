@@ -45,7 +45,7 @@ function createAllResources() {
     factoriesExcavators: variable(0, 'factoriesExcavators'),
     factoriesCashMachines: variable(0, 'factoriesCashMachines'),
     factoriesPanzers: variable(0, 'factoriesPanzers'),
-    commands: variable(10, 'commands', {formatter: x => x.toFixed(2)})
+    commands: variable(3, 'commands', {formatter: x => x.toFixed(2)})
   }
   areas = {
     planes: resources.planes,

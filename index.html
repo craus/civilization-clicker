@@ -84,58 +84,61 @@
 
 <div class="container"> 
   <br> 
-  <div class="row centered"> 
-    <div class="col-sm-4">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big left">
-          <span class="name">Time<br></span> <span class="time value">?</span> 
-        </div>
-      </div>   
+
+  <div class="row centered">
+    <div class="col-sm-2"> 
+      <table class="table">
+        <thead><tr><th scope="col">Time</th></tr></thead>
+        <tbody><tr><th scope="row" class="time value">???</th></tbody>
+      </table>
     </div>
-    <div class="col-sm-4">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big left">
-          <span class="name">Commands<br></span> <span class="commands value">?</span> 
-        </div>
-      </div>   
+    <div class="col-sm-2"> 
+      <table class="table">
+        <thead><tr><th scope="col">Commands</th></tr></thead>
+        <tbody><tr><th scope="row" class="commands value">???</th></tbody>
+      </table>
     </div>
-    <div class="col-sm-4">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big right">
-          <span class="name">Money<br></span> 
-          <span class="money value">?</span> 
-          <span class="label label-success money income">+?</span>
-        </div>
-      </div>   
-    </div> 
-    <div class="col-sm-4 populationTab">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big left">
-          <span class="name">Population<br></span>
-          <span class="population value">?</span>
-          <span class="label label-success population income">+?</span> 
-        </div>
-      </div>   
-    </div> 
-    <div class="col-sm-4 populationTab">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big right">
-          <span class="name">Minerals<br></span> 
-          <span class="minerals value">?</span> 
-          <span class="label label-success minerals income">+?</span>
-        </div>
-      </div>   
-    </div>     
-    <div class="col-sm-4 techTab">       
-      <div class="panel panel-default panel-readiness">
-        <div class="panel-body big right">
-          <span class="name">Technologies<br></span> 
-          <span class="totalTech value">?</span> 
-        </div>
-      </div>   
-    </div>  
-  </div>  
-  
+    <div class="col-sm-2"> 
+      <table class="table">
+        <thead><tr><th scope="col">Money</th></tr></thead>
+        <tbody><tr>        
+          <th scope="row" class="money">
+            <span class="value">?</span> 
+            <span class="label label-success income">+?</span>
+          </th>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="col-sm-2 populationTab"> 
+      <table class="table">
+        <thead><tr><th scope="col">Population</th></tr></thead>
+        <tbody><tr>        
+          <th scope="row" class="population">
+            <span class="value">?</span> 
+            <span class="label label-success income">+?</span>
+          </th>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="col-sm-2 populationTab"> 
+      <table class="table">
+        <thead><tr><th scope="col">Minerals</th></tr></thead>
+        <tbody><tr>        
+          <th scope="row" class="minerals">
+            <span class="value">?</span> 
+            <span class="label label-success income">+?</span>
+          </th>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="col-sm-2 techTab"> 
+      <table class="table">
+        <thead><tr><th scope="col">Technologies</th></tr></thead>
+        <tbody><tr><th scope="row" class="totalTech value">???</th></tbody>
+      </table>
+    </div>
+  </div>
+
   <ul class="nav nav-tabs sections">
     <li><a data-toggle="tab" href="#population" class="populationTab">Population</a></li>
     <li><a data-toggle="tab" href="#happiness" class="happinessTab">Happiness</a></li>
@@ -162,6 +165,7 @@
     </a></li>
     <li><a data-toggle="tab" href="#settings">Settings</a></li>
   </ul>
+
   <div class="tab-content">
     <div id="population" class="tab-pane fade">
       <br>

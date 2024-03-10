@@ -50,7 +50,7 @@ function createCivilization(params) {
   
   bot = createBot()
   
-  savedata.activeTab = savedata.activeTab || '#population'
+  savedata.activeTab = savedata.activeTab || '#science'
   savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   
   show = savedata.show || {

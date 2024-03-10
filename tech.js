@@ -101,7 +101,7 @@ function createAllTechs() {
   
   Object.values(techs).filter(t => t.value == 1).sort((a,b) => a.researchedAt - b.researchedAt).forEach((t, i) => t.createHistoryRow(i+1))
   
-  techCostByTechCount = techCount => approx(1000 * Math.pow(10, 3.5*techCount + 0.2*Math.pow(techCount, 2)))
+  techCostByTechCount = techCount => approx(100000 * Math.pow(10, 3.5*techCount + 0.2*Math.pow(techCount, 2)))
   techCost = () => techCostByTechCount(resources.totalTech())
   
   return techs
