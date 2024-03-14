@@ -170,19 +170,21 @@
     <div id="population" class="tab-pane fade">
       <br>
       <div class="row centered">
-        <div class="col-sm-6">    
+        <div class="col-sm-6">     
+          <div class="panel panel-default panel-readiness">   
+            <div class="panel-body big minerals">
+              <span class="name">Minerals:</span>
+              <span class="value">?</span>
+              <span class="label label-success income">+?</span>
+            </div>   
+          </div> 
           <div class="panel panel-default panel-readiness">   
             <div class="panel-body big population">
               <span class="name">Population:</span>
               <span class="value">?</span>
               <span class="label label-success income">+?</span>
             </div>   
-          </div>   
-          <div class="panel panel-default panel-readiness mineralsTechRequired">       
-            <div class="panel-body big">
-              <span class="name">House (+1 population)</span>
-            </div>
-          </div>
+          </div>  
           <div class="panel panel-primary market houses mineralsTechRequired">
             <div class="panel-heading"><h3>Houses market level <span class="level">?</span></h3></div>
             <div class="panel-body big">
@@ -275,7 +277,9 @@
                 <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
               </div>
             </div> 
-          </div>  
+          </div>
+        </div>
+        <div class="col-sm-6">  
           <div class="panel panel-default panel-readiness circusesTechRequired">       
             <div class="panel-body big circuses">
               <span class="name">Circuses:</span>
@@ -290,7 +294,12 @@
                 <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
               </div>
             </div>
-          </div>          
+          </div>   
+          <div class="panel panel-default panel-readiness">   
+            <div class="panel-body big happiness">
+              Build a circus (+1 happiness/second)
+            </div>   
+          </div>                 
           <div class="panel panel-primary market circuses circusesTechRequired">
             <div class="panel-heading"><h3>Circuses market level <span class="level">?</span></h3></div>
             <div class="panel-body big">
@@ -407,18 +416,14 @@
     <div id="science" class="tab-pane fade">
       <br>
       <div class="row centered">
-        <div class="col-sm-6">    
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big science">
-              <span class="name">Science:</span>
-              <span class="value">?</span>
+        <div class="col-sm-6"> 
+          <div class="panel panel-default panel-readiness">       
+            <div class="panel-body big money">
+              <span class="name">Money:</span>
+              <span class="value">?</span> 
               <span class="label label-success income">+?</span>
-            </div>  
-            <div class="panel-body big">
-              <span class="name">Next tech cost:</span>
-              <span class="techCost">?</span> science
-            </div>  
-          </div>   
+            </div> 
+          </div>  
           <div class="panel panel-default panel-readiness">       
             <div class="panel-body big scientists">
               <span class="name">Scientists:</span>
@@ -475,6 +480,19 @@
               </div>
             </div> 
           </div>     
+        </div>
+        <div class="col-sm-6">     
+          <div class="panel panel-default panel-readiness">   
+            <div class="panel-body big science">
+              <span class="name">Science:</span>
+              <span class="value">?</span>
+              <span class="label label-success income">+?</span>
+            </div>  
+            <div class="panel-body big">
+              <span class="name">Next tech cost:</span>
+              <span class="techCost">?</span> science
+            </div>  
+          </div>    
         </div>
       </div>
     </div>
@@ -693,22 +711,15 @@
     <div id="military" class="tab-pane fade">
       <br>
       <div class="row centered">
-        <div class="col-sm-6">    
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big warpower">
-              <span class="name">Warpower:</span>
-              <span class="value">?</span>
+        <div class="col-sm-6">  
+          <div class="panel panel-default panel-readiness"> 
+            <div class="panel-body big money">
+              <span class="name">Money:</span>
+              <span class="value">?</span> 
               <span class="label label-success income">+?</span>
-            </div>  
-            <div class="panel-body big">
-              <span class="name">Next conquest cost:</span>
-              <span class="conquestCost value">?</span> warpower
-            </div>  
-            <div class="panel-body big">
-              <span class="name">Each next conquest cost <span class="conquestPenalty">?</span> times more</span>
-            </div>  
-          </div>   
-          <div class="panel panel-default panel-readiness">       
+            </div>
+          </div>
+          <div class="panel panel-default panel-readiness"> 
             <div class="panel-body big soldiers">
               <span class="name">Soldiers:</span>
               <span class="value">?</span> 
@@ -754,7 +765,25 @@
                 <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
               </div>
             </div>
-          </div>   
+          </div>  
+
+        </div>
+
+        <div class="col-sm-6">    
+          <div class="panel panel-default panel-readiness">   
+            <div class="panel-body big warpower">
+              <span class="name">Warpower:</span>
+              <span class="value">?</span>
+              <span class="label label-success income">+?</span>
+            </div>  
+            <div class="panel-body big">
+              <span class="name">Next conquest cost:</span>
+              <span class="conquestCost value">?</span> warpower
+            </div>  
+            <div class="panel-body big">
+              <span class="name">Each next conquest cost <span class="conquestPenalty">?</span> times more</span>
+            </div>  
+          </div> 
         </div>
       </div>
     </div>
