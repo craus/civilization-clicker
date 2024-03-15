@@ -429,71 +429,89 @@
     </div>
     <div id="science" class="tab-pane fade">
       <br>
+      <ul class="nav nav-tabs science">
+        <li><a data-toggle="tab" href="#scientists" class="scientistsTab">Scientists</a></li>
+        <li><a data-toggle="tab" href="#labs" class="labsTab labsTechRequired">Labs</a></li>
+      </ul>     
+      <br>   
       <div class="row centered">
         <div class="col-sm-6"> 
-          <div class="panel panel-default panel-readiness">       
-            <div class="panel-body big money">
-              <span class="name">Money:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-            </div> 
-          </div>  
-          <div class="panel panel-default panel-readiness">       
-            <div class="panel-body big scientists">
-              <span class="name">Scientists:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-            </div> 
-          </div>  
-          <div class="panel panel-primary market scientists">
-            <div class="panel-heading"><h3>Scientists market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Hire <span class="scientists label label-primary">?</span> scientists 
-                for <span class="money label label-primary">?</span> money
-              </span>
+          <div class="tab-content">
+            <div id="scientists" class="tab-pane fade">  
+              <div class="panel panel-default panel-readiness">       
+                <div class="panel-body big money">
+                  <span class="name">Money:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div> 
+              </div>  
+              <div class="panel panel-default panel-readiness">       
+                <div class="panel-body big scientists">
+                  <span class="name">Scientists:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div> 
+              </div>  
+              <div class="panel panel-primary market scientists">
+                <div class="panel-heading"><h3>Scientists market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Hire <span class="scientists label label-primary">?</span> scientists 
+                    for <span class="money label label-primary">?</span> money
+                  </span>
+                </div>
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
+              </div>     
             </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>     
-          <div class="panel panel-default panel-readiness labsTechRequired">       
-            <div class="panel-body big labs">
-              <span class="name">Labs:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg buildLabs hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Build <span class="labs">?</span> (<span class="minerals">?</span> minerals)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
+            <div id="labs" class="tab-pane fade">
+              <div class="panel panel-default panel-readiness">       
+                <div class="panel-body big minerals">
+                  <span class="name">Minerals:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div> 
+              </div>              
+              <div class="panel panel-default panel-readiness labsTechRequired">       
+                <div class="panel-body big labs">
+                  <span class="name">Labs:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                  <br>
+                  <div class="btn-group btn-group-lg buildLabs hidden">
+                    <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
+                    <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
+                      Build <span class="labs">?</span> (<span class="minerals">?</span> minerals)
+                    </button>
+                    <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
+                  </div>
+                </div>
+              </div>   
+              <div class="panel panel-primary market labs labsTechRequired">
+                <div class="panel-heading"><h3>Labs market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Build <span class="labs label label-primary">?</span> labs 
+                    for <span class="minerals label label-primary">?</span> minerals
+                  </span>
+                </div>
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
+              </div> 
             </div>
-          </div>   
-          <div class="panel panel-primary market labs labsTechRequired">
-            <div class="panel-heading"><h3>Labs market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Build <span class="labs label label-primary">?</span> labs 
-                for <span class="minerals label label-primary">?</span> minerals
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>     
+          </div>
         </div>
         <div class="col-sm-6">     
           <div class="panel panel-default panel-readiness">   
