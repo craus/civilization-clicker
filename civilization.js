@@ -33,6 +33,7 @@ function createCivilization(params) {
     savedata.activeTechSubsetTab = $('.techSubsets>.active>a').attr('href')
     savedata.activeAreaTab = $('.areas>.active>a').attr('href')
     savedata.activeScienceTab = $('.science>.active>a').attr('href')
+    savedata.activePopulationTab = $('.population>.active>a').attr('href')
     savedata.realTime = timestamp || Date.now()
     localStorage[saveName] = JSON.stringify(savedata)
   } 
@@ -66,6 +67,7 @@ function createCivilization(params) {
   $('a[href="' + savedata.activeTechSubsetTab + '"]').tab('show')
   
   $('a[href="' + savedata.activeScienceTab + '"]').tab('show')
+  $('a[href="' + savedata.activePopulationTab + '"]').tab('show')
   
   $('a[href="#availableTechs"]').click(() => { 
     show.availableTechs = true
