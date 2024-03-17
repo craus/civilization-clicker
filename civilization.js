@@ -55,6 +55,7 @@ function createCivilization(params) {
   savedata.activeTab = savedata.activeTab || '#science'
   savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   savedata.activeScienceTab = savedata.activeScienceTab || '#scientists'
+  savedata.activeScienceTab = savedata.activePopulationTab || '#population'
   
   show = savedata.show || {
     availableTechs: true,

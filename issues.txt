@@ -3,3 +3,9 @@ show list of invented techs (and tabs with descriptions)
 fix descriptions of lands (x10, not x2)
 too many techs are locked by geology
 
+дополнительная мотивация для новых игроков чтобы нажимать кнопочку decline?
+обращать внимание игрока что изобрелась новая технология?
+показывать игроку что у него не хватает команд
+на более высоком рынка предлагают меньше фестивалей
+
+агрикультура не открывается
