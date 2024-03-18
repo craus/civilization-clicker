@@ -55,18 +55,19 @@ function createCivilization(params) {
   savedata.activeTab = savedata.activeTab || '#science'
   savedata.activeTechSubsetTab = savedata.activeTechSubsetTab || '#availableTechs'
   savedata.activeScienceTab = savedata.activeScienceTab || '#scientists'
-  savedata.activeScienceTab = savedata.activePopulationTab || '#population'
+  savedata.activePopulationTab = savedata.activePopulationTab || '#houses'
   
   show = savedata.show || {
     availableTechs: true,
     researchedTechs: false
   }
+
+  console.log(savedata)
   
   $('a[href="' + savedata.activeTab + '"]').tab('show')
   $('a[href="' + savedata.activeTechTab + '"]').tab('show')
   $('a[href="' + savedata.activeAreaTab + '"]').tab('show')
   $('a[href="' + savedata.activeTechSubsetTab + '"]').tab('show')
-  
   $('a[href="' + savedata.activeScienceTab + '"]').tab('show')
   $('a[href="' + savedata.activePopulationTab + '"]').tab('show')
   
