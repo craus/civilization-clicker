@@ -39,6 +39,7 @@ function createAllResources() {
     circuses: variable(0, 'circuses'),
     universities: variable(0, 'universities'),
     barracks: variable(0, 'barracks'),
+    bunkers: variable(0, 'bunkers'),
     factories: variable(0, 'factories'),
     factoriesCranes: variable(0, 'factoriesCranes'),
     factoriesTractors: variable(0, 'factoriesTractors'),
