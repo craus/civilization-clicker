@@ -262,100 +262,107 @@
     </div>
     <div id="happiness" class="tab-pane fade">
       <br>
-      <div class="row centered">
-        <div class="col-sm-6"> 
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big money">
-              <span class="name">Money:</span>
-              <span class="value">?</span>
-              <span class="label label-success income">+?</span>
-            </div>   
-          </div>      
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big happiness">
-              <span class="name">Happiness:</span>
-              <span class="value">?</span>
-              <span class="label label-success income">+?</span>
-            </div>   
-          </div>   
-          <div class="panel panel-default panel-readiness moneyTechRequired">       
-            <div class="panel-body big">
-              <span class="name">Organize a festival (+1 happiness)</span>
-              <br>
-              <div class="btn-group btn-group-lg organizeCelebrations hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Organize <span class="happiness">?</span> (<span class="money">?</span> money)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
+      <ul class="nav nav-tabs happiness">
+        <li><a data-toggle="tab" href="#festivalsTab">Festivals</a></li>
+        <li><a data-toggle="tab" href="#circusesTab" class="circusesTechRequired">Circuses</a></li>
+      </ul>     
+      <br>
+      
+      <div class="tab-content">
+        <div id="festivalsTab" class="tab-pane fade"> 
+          <div class="row centered">
+            <div class="col-sm-6"> 
+              <div class="panel panel-default panel-readiness">   
+                <div class="panel-body big money">
+                  <span class="name">Money:</span>
+                  <span class="value">?</span>
+                  <span class="label label-success income">+?</span>
+                </div>   
+              </div>      
+              <div class="panel panel-default panel-readiness">   
+                <div class="panel-body big happiness">
+                  <span class="name">Happiness:</span>
+                  <span class="value">?</span>
+                  <span class="label label-success income">+?</span>
+                </div>   
+              </div>   
+              <div class="panel panel-default panel-readiness moneyTechRequired">       
+                <div class="panel-body big">
+                  <span class="name">Organize a festival (+1 happiness)</span>
+                </div>
+              </div>
+              <div class="panel panel-primary market celebrations celebrationsTechRequired">
+                <div class="panel-heading"><h3>Festivals market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Organize <span class="happiness label label-primary">?</span> festivals 
+                    for <span class="money label label-primary">?</span> money
+                  </span>
+                </div>
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
               </div>
             </div>
-          </div>
-          <div class="panel panel-primary market celebrations celebrationsTechRequired">
-            <div class="panel-heading"><h3>Festivals market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Organize <span class="happiness label label-primary">?</span> festivals 
-                for <span class="money label label-primary">?</span> money
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>
+          </div>     
         </div>
-        <div class="col-sm-6 circusesTechRequired"> 
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big minerals">
-              <span class="name">Minerals:</span>
-              <span class="value">?</span>
-              <span class="label label-success income">+?</span>
-            </div>   
-          </div>         
-          <div class="panel panel-default panel-readiness">       
-            <div class="panel-body big circuses">
-              <span class="name">Circuses:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg buildCircuses hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Build <span class="circuses">?</span> (<span class="minerals">?</span> minerals)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
+        <div id="circusesTab" class="tab-pane fade"> 
+          <div class="row centered">
+            <div class="col-sm-6"> 
+              <div class="panel panel-default panel-readiness">   
+                <div class="panel-body big minerals">
+                  <span class="name">Minerals:</span>
+                  <span class="value">?</span>
+                  <span class="label label-success income">+?</span>
+                </div>   
+              </div>         
+              <div class="panel panel-default panel-readiness">       
+                <div class="panel-body big circuses">
+                  <span class="name">Circuses:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div>
+              </div>   
+              <div class="panel panel-default panel-readiness">   
+                <div class="panel-body big happiness">
+                  Build a circus (+1 happiness/second)
+                </div>   
+              </div>                 
+              <div class="panel panel-primary market circuses circusesTechRequired">
+                <div class="panel-heading"><h3>Circuses market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Build <span class="circuses label label-primary">?</span> circuses 
+                    for <span class="minerals label label-primary">?</span> minerals
+                  </span>
+                </div>
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
+              </div>  
             </div>
-          </div>   
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big happiness">
-              Build a circus (+1 happiness/second)
-            </div>   
-          </div>                 
-          <div class="panel panel-primary market circuses circusesTechRequired">
-            <div class="panel-heading"><h3>Circuses market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Build <span class="circuses label label-primary">?</span> circuses 
-                for <span class="minerals label label-primary">?</span> minerals
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>  
-        </div>
-      </div>     
+            <div class="col-sm-6"> 
+              <div class="panel panel-default panel-readiness">   
+                <div class="panel-body big happiness">
+                  <span class="name">Happiness:</span>
+                  <span class="value">?</span>
+                  <span class="label label-success income">+?</span>
+                </div>   
+              </div>  
+            </div>          
+          </div>     
+        </div>        
+      </div>
     </div>
     <div id="industry" class="tab-pane fade">
       <br>

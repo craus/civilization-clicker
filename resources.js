@@ -65,6 +65,7 @@ function createAllResources() {
   
   techs = createAllTechs()
 
+
   resources.science.income = (() => 
     resources.scientists() *
     (1+resources.labs()) *
