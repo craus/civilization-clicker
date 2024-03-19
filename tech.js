@@ -82,7 +82,7 @@ function createAllTechs() {
     minersGuild: tech(0, 'minersGuildTech', 'Miners Guild'),
     scientistsGuild: tech(0, 'scientistsGuildTech', 'Scientists Guild'),
     circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
-    //barracks: tech(0, 'barracksTech', 'Field Constructions'),
+    barracks: tech(0, 'barracksTech', 'Field Constructions'),
     win: tech(0, 'winTech', 'Interplanet Colonization')
   }
   
@@ -92,10 +92,11 @@ function createAllTechs() {
   techs.labs.require(techs.minerals)
   techs.circuses.require(techs.happiness)
   techs.circuses.require(techs.minerals)
-  techs.circuses.require(techs.minerals)
   techs.minersGuild.require(techs.happiness)
   techs.minersGuild.require(techs.minerals)
   techs.scientistsGuild.require(techs.happiness)
+  techs.barracks.require(techs.military)
+  techs.barracks.require(techs.minerals)
   
   Object.values(techs).forEach(t => {if (t != techs.win) techs.win.require(t)})
   

@@ -88,6 +88,14 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
+    farms: market('farms', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'farms',
+      zoomFrom: 0.5 * z + 3,
+      zoomTo: z => 0.9*Math.pow(z, 0.8),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
     mines: market('mines', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'mines',
@@ -104,11 +112,11 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    farms: market('farms', z => rand.deal({
+    barracks: market('barracks', z => rand.deal({
       resourceFrom: 'minerals',
-      resourceTo: 'farms',
-      zoomFrom: 0.5 * z + 3,
-      zoomTo: z => 0.9*Math.pow(z, 0.8),
+      resourceTo: 'barracks',
+      zoomFrom: 0.5 * z + 2,
+      zoomTo: z => 2.05*Math.pow(z, 0.48) - 1,
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),

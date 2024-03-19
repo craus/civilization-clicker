@@ -578,6 +578,7 @@
             <li class="marketplacesTech"><a data-toggle="tab" href="#marketplaces">Economy</a></li>
             <li class="labsTech"><a data-toggle="tab" href="#labsTech">Labs</a></li>
             <li class="militaryTech"><a data-toggle="tab" href="#militaryTech">Military</a></li>
+            <li class="barracksTech"><a data-toggle="tab" href="#barracksTech">Field Constructions</a></li>
             <li class="winTech"><a data-toggle="tab" href="#winTech">Interplanet Colonization</a></li>
           </ul>    
         </div>
@@ -724,6 +725,18 @@
                 </button>
               </div>
             </div>
+            <div id="barracksTech" class="tab-pane barracksTech fade">
+              <h3 class="name">Field Constructions</h3>
+              <p><i><small>Our soldiers must have place to live.</small></i></p>
+              <p>Allows to build barracks at a cost of minerals.</p>
+              <p>Each barrack gives +1 soldier/second.</p>
+              <div class="row centered">
+                <button class="btn btn-primary btn-lg pick btn-block">Pick</button>
+                <button class="btn btn-success btn-lg nohover picked btn-block" disabled>Researched at
+                  <span class="researchedAt"/> seconds
+                </button>
+              </div>
+            </div>
             <div id="winTech" class="tab-pane winTech fade">
               <h3 class="name">Interplanet Colonization</h3>
               <p><i><small>Bring sentient life to another planets!</small></i></p>
@@ -772,63 +785,86 @@
     </div>
     <div id="military" class="tab-pane fade">
       <br>
+      <ul class="nav nav-tabs military">
+        <li><a data-toggle="tab" href="#soldiersTab" class="soldiersTab">Soldiers</a></li>
+        <li><a data-toggle="tab" href="#barracksTab" class="barracksTab barracksTechRequired">Barracks</a></li>
+      </ul>     
+      <br>   
       <div class="row centered">
+
         <div class="col-sm-6">  
-          <div class="panel panel-default panel-readiness"> 
-            <div class="panel-body big money">
-              <span class="name">Money:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
+
+          <div class="tab-content military">
+            <div id="soldiersTab" class="tab-pane fade">
+              <div class="panel panel-default panel-readiness"> 
+                <div class="panel-body big money">
+                  <span class="name">Money:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div>
+              </div>
+              <div class="panel panel-default panel-readiness"> 
+                <div class="panel-body big soldiers">
+
+                  <span class="name">Soldiers:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div> 
+              </div>  
+              <div class="panel panel-primary market soldiers">
+                <div class="panel-heading"><h3>Soldiers market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Build <span class="soldiers label label-primary">?</span> soldiers 
+                    for <span class="money label label-primary">?</span> money
+                  </span>
+                </div>     
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
+              </div>   
+            </div>  
+
+            <div id="barracksTab" class="tab-pane fade">
+              <div class="panel panel-default panel-readiness"> 
+                <div class="panel-body big minerals">
+                  <span class="name">Minerals:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div>
+              </div>
+              <div class="panel panel-default panel-readiness"> 
+                <div class="panel-body big soldiers">
+
+                  <span class="name">Soldiers:</span>
+                  <span class="value">?</span> 
+                  <span class="label label-success income">+?</span>
+                </div> 
+              </div>  
+              <div class="panel panel-primary market soldiers">
+                <div class="panel-heading"><h3>Soldiers market level <span class="level">?</span></h3></div>
+                <div class="panel-body big">
+                  <span class="deal">
+                    Build <span class="soldiers label label-primary">?</span> soldiers 
+                    for <span class="money label label-primary">?</span> money
+                  </span>
+                </div>     
+                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+                  </div>
+                </div> 
+              </div>   
             </div>
           </div>
-          <div class="panel panel-default panel-readiness"> 
-            <div class="panel-body big soldiers">
-              <span class="name">Soldiers:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg hireSoldiers hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Hire <span class="soldiers">?</span> (<span class="money">?</span> money)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
-            </div> 
-          </div>  
-          <div class="panel panel-primary market soldiers">
-            <div class="panel-heading"><h3>Soldiers market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Build <span class="soldiers label label-primary">?</span> soldiers 
-                for <span class="money label label-primary">?</span> money
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>     
-          <div class="panel panel-default panel-readiness barracksTechRequired hidden">       
-            <div class="panel-body big barracks">
-              <span class="name">Barracks:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg buildBarracks">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Build <span class="barracks">?</span> (<span class="minerals">?</span> minerals)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
-            </div>
-          </div>  
-
         </div>
 
         <div class="col-sm-6">    
