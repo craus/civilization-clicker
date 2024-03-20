@@ -1,6 +1,8 @@
 function createAllResources() {
   resources = {
     time: variable(0, 'time', {formatter: Format.time}),
+    timeSpeed: variable(0, 'timeSpeed'),
+    timeSkip: variable(1, 'timeSkip'),
     idleTime: variable(0, 'idleTime'),
     money: variable(0, 'money'),
     population: variable(1, 'population'),
@@ -60,6 +62,7 @@ function createAllResources() {
       if (resources.conquests.value >= 1) {
         area.value += 1
         resources.conquests.value -= 1
+        civilization.afterAction()
       }
     })
   })

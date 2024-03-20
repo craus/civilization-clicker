@@ -48,6 +48,7 @@ tech = function(initialValue, id, name, params) {
       this.researchedAt = resources.time.value
       this.createHistoryRow(researchedTechsCount()) 
       $('.techs .'+id).appendTo($('.researchedTechs'))
+      civilization.afterAction()
     },
     buyResearch: function() {
       if (this.available() && this.affordable() && !this.researched()) {

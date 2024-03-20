@@ -1,4 +1,4 @@
-timeUntil = function(predicate) {
+timeWhen = function(predicate) {
   civilization.backup()
   
   for (let i = 0; i < 100; i++) {
@@ -12,7 +12,7 @@ timeUntil = function(predicate) {
   
   civilization.restore()
   
-  for (let i = 0; i < 1e6; i++) {
+  for (let i = 0; i < 1e4; i++) {
     civilization.tickTime(0.1)
     if (predicate()) {
       break
@@ -20,5 +20,5 @@ timeUntil = function(predicate) {
   }
   var targetTime = resources.time()
   civilization.restore()
-  return targetTime - resources.time()
+  return targetTime
 }

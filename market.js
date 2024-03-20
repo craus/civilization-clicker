@@ -1,5 +1,3 @@
-
-
 function market(verb, id, generateDeal)
 {
   var panel = instantiate("marketSample")
@@ -27,7 +25,12 @@ function market(verb, id, generateDeal)
     maxLevel: 0,
     deal: null,
     accept: function() {
-      if (!this.affordable()) return
+      if (!this.affordable()) {
+        if (resources.timeSkip() < 1) {
+          return 
+        }
+        civilization.tickTime(this.remainingTime())
+      }
       Object.entries(this.deal.change).forEach(c => resources[c[0]].value += c[1])
       this.level += 1
       if (this.level > this.maxLevel) {
@@ -37,11 +40,13 @@ function market(verb, id, generateDeal)
       resources.commands.value -= 1
       resources.idleTime.value = 0
       this.generateNewDeal()
+      civilization.afterAction()
     },
     decline: function() {
       if (!this.declinable()) return
       this.level -= 1
       this.generateNewDeal()
+      civilization.afterAction()
     },
     generateNewDeal: function() {
       this.deal = generateDeal(this.level)
@@ -52,13 +57,20 @@ function market(verb, id, generateDeal)
     declinable: function() {
       return this.level >= 1
     },
+    affordableMomentCache: null,
+    affordableMoment: function() {
+      if (this.affordableMomentCache == null) {
+        this.affordableMomentCache = timeWhen(() => resources[from]()+this.deal.change[from] > -eps && resources.commands() > 1-eps)
+      }
+      return this.affordableMomentCache
+    },
     remainingTime: function() {
-      return timeUntil(() => resources[from]()+this.deal.change[from] >= 0 && resources.commands() >= 1)
+      return this.affordableMoment() - resources.time()
     },
     paint: function() {
       panel.find('.level').text(this.level)
       decline.toggleClass('disabled', !this.declinable())
-      accept.toggleClass('disabled', !this.affordable())
+      accept.toggleClass('disabled', !this.affordable() && resources.timeSkip() == 0)
       
       panel.find('.unavailable').toggle(!this.affordable())
       panel.find('.remainingTime').text(Format.time(this.remainingTime()))
@@ -72,7 +84,10 @@ function market(verb, id, generateDeal)
         level: this.level,
         deal: this.deal
       }
-    }
+    },
+    afterAction: function() {
+      this.affordableMomentCache = null
+    },
   }, {})
   
   accept.click(function() { result.accept() })

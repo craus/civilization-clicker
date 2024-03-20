@@ -1,4 +1,4 @@
-const eps = 1e-9
+const eps = 1e-4
 
 toType = function(obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -203,7 +203,7 @@ const Format = {
     if (x >= Number.POSITIVE_INFINITY) {
       return '#{0}&nbsp;s'.i(large(x))
     }
-    return moment.duration(x,'s').format("d [days] hh:mm:ss", { trim: true, precision: 1 })
+    return moment.duration(x+eps,'s').format("d [days] hh:mm:ss", { trim: true, precision: 1 })
   },
   percent: function(x) {
     return '#{0}%'.i(Math.round(x*100))

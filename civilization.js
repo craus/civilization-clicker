@@ -151,6 +151,8 @@ function createCivilization(params) {
         resources.tech.value += 1
       }
       
+      deltaTime *= resources.timeSpeed()
+      
       var maxDeltaTime = 0.1
       
       while (deltaTime > maxDeltaTime) {
@@ -162,7 +164,10 @@ function createCivilization(params) {
       
       save(currentTime)
       debug.unprofile('tick')
-    }
+    },
+    afterAction: function() {
+      Object.values(markets).each('afterAction')
+    },
   }
   return civilization
 }
