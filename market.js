@@ -52,10 +52,16 @@ function market(verb, id, generateDeal)
     declinable: function() {
       return this.level >= 1
     },
+    remainingTime: function() {
+      return -(resources[from]()+this.deal.change[from]) / resources[from].income()
+    },
     paint: function() {
       panel.find('.level').text(this.level)
       decline.toggleClass('disabled', !this.declinable())
       accept.toggleClass('disabled', !this.affordable())
+      
+      panel.find('.unavailable').toggle(!this.affordable())
+      panel.find('.remainingTime').text(Format.time(this.remainingTime()))
       
       panel.find('.from.change').text(large(-this.deal.change[from]))
       panel.find('.to.change').text(large(this.deal.change[to]))
@@ -111,7 +117,7 @@ function createAllMarkets() {
       zoomTo: z => 0.574*Math.pow(z, 0.55),
       qualitySpread: 0.5,
       zoomSpread: 0.5
-    }))
+    })),
     houses: market('Build', 'houses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'population',
