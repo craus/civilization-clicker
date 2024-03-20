@@ -86,6 +86,34 @@ function createCivilization(params) {
     show.researchedTechs = true
   }) 
   
+  var updateTimeLink = () => {
+    $('.timeLink .off').toggle(resources.timeSpeed() == 0)
+    $('.timeLink .on').toggle(resources.timeSpeed() == 1)
+  }
+  $('.timeLink .switchOn').click(() => {
+    resources.timeSpeed.value = 1
+    updateTimeLink()
+  })
+  $('.timeLink .switchOff').click(() => {
+    resources.timeSpeed.value = 0
+    updateTimeLink()
+  })
+  updateTimeLink()
+  
+  var updateTimeSkip = () => {
+    $('.timeSkip .off').toggle(resources.timeSkip() == 0)
+    $('.timeSkip .on').toggle(resources.timeSkip() == 1)
+  }
+  $('.timeSkip .switchOn').click(() => {
+    resources.timeSkip.value = 1
+    updateTimeSkip()
+  })
+  $('.timeSkip .switchOff').click(() => {
+    resources.timeSkip.value = 0
+    updateTimeSkip()
+  })
+  updateTimeSkip()
+  
   civilization = {
     backup: function() {
       Object.values(resources).each('backup')

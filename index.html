@@ -752,8 +752,55 @@
     </div>
     <div id="settings" class="tab-pane fade">
       <br>
-      <div class="row centered">
-        <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#confirm-wipe-save">Wipe save</button>
+      
+      
+      
+      <div class="row ">
+        <div class="col-sm-4 timeLink">
+          <div class="panel panel-primary ">
+            <div class="panel-heading big right">
+              <span class="name">Time Link:</span>  
+              <span class="label label-success on">ON</span>
+              <span class="label label-danger off">OFF</span>
+            </div>            
+            <div class="panel-body height100 right">
+              When Time Link is on, game time advances together with real time.
+            </div>             
+            <div class="panel-footer centered">
+              <button type="button" class="btn btn-primary btn-lg on switchOff nohover">Switch off</button>
+              <button type="button" class="btn btn-primary btn-lg off switchOn nohover">Switch on</button>
+            </div>     
+          </div>   
+        </div>
+        <div class="col-sm-4 timeSkip">
+          <div class="panel panel-primary">
+            <div class="panel-heading big right">
+              <span class="name">Time Skip:</span>  
+              <span class="label label-success on">ON</span>
+              <span class="label label-danger off">OFF</span>
+            </div>            
+            <div class="panel-body height100 right">
+              When Time Skip is on, any action available in future will be available right now, but skipping that much time.
+            </div>             
+            <div class="panel-footer centered">
+              <button type="button" class="btn btn-primary btn-lg on switchOff nohover">Switch off</button>
+              <button type="button" class="btn btn-primary btn-lg off switchOn nohover">Switch on</button>
+            </div>     
+          </div>
+        </div>
+        <div class="col-sm-4 wipeSave">
+          <div class="panel panel-primary">
+            <div class="panel-heading big right">
+              <span class="name">Wipe Save</span>  
+            </div>            
+            <div class="panel-body height100 right">
+              Destroy all save data of your game. Start totally from scratch.
+            </div>           
+            <div class="panel-footer centered">
+              <button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#confirm-wipe-save">Wipe save</button>  
+            </div>    
+          </div>  
+        </div>        
       </div>
     </div>
   </div>  
@@ -765,7 +812,7 @@
     
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Confirm Wipe save</h4>
+        <h4 class="modal-title" id="myModalLabel">Confirm Wipe Save</h4>
       </div>
   
       <div class="modal-body">
