@@ -12,13 +12,17 @@ timeWhen = function(predicate) {
   
   civilization.restore()
   
-  for (let i = 0; i < 1e4; i++) {
+  var result = false
+  
+  for (let i = 0; i < 36000; i++) {
     civilization.tickTime(0.1)
     if (predicate()) {
+      result = true
       break
     }
   }
   var targetTime = resources.time()
+  targetTime = Object.assign(targetTime, {result: result})
   civilization.restore()
   return targetTime
 }

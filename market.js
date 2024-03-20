@@ -30,6 +30,10 @@ function market(verb, id, generateDeal)
           return 
         }
         civilization.tickTime(this.remainingTime())
+        if (!this.affordable()) {
+          civilization.afterAction()
+          return
+        }
       }
       Object.entries(this.deal.change).forEach(c => resources[c[0]].value += c[1])
       this.level += 1
@@ -52,7 +56,7 @@ function market(verb, id, generateDeal)
       this.deal = generateDeal(this.level)
     },
     affordable: function() {
-      return resources.commands() >= 1 && Object.entries(this.deal.change).every(c => resources[c[0]].value >= -c[1])
+      return resources.commands() >= 1 && Object.entries(this.deal.change).every(c => resources[c[0]].value > -c[1] - eps)
     },
     declinable: function() {
       return this.level >= 1
@@ -74,6 +78,8 @@ function market(verb, id, generateDeal)
       
       panel.find('.unavailable').toggle(!this.affordable())
       panel.find('.remainingTime').text(Format.time(this.remainingTime()))
+      
+      panel.find('.action').text(this.affordableMoment().result ? 'Accept' : 'Wait')
       
       panel.find('.from.change').text(large(-this.deal.change[from]))
       panel.find('.to.change').text(large(this.deal.change[to]))
