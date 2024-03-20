@@ -87,6 +87,12 @@ function createCivilization(params) {
   }) 
   
   civilization = {
+    backup: function() {
+      Object.values(resources).each('backup')
+    },
+    restore: function() {
+      Object.values(resources).each('restore')
+    },
     paint: function() {
       debug.profile('paint')
       
@@ -124,7 +130,9 @@ function createCivilization(params) {
         resources.warpower.value -= resources.conquestCost()
         resources.conquestCost.value *= conquestPenalty()
         resources.conquests.value += 1
-      }      
+      }    
+
+      //bot.tick(deltaTime)      
     },
     tick: function() {
       if (resources.conquestCost.value < 100) resources.conquestCost.value = 100
@@ -143,8 +151,14 @@ function createCivilization(params) {
         resources.tech.value += 1
       }
       
+      var maxDeltaTime = 0.1
+      
+      while (deltaTime > maxDeltaTime) {
+        this.tickTime(maxDeltaTime)
+        deltaTime -= maxDeltaTime
+      }
+      
       this.tickTime(deltaTime)
-      bot.tick(deltaTime)
       
       save(currentTime)
       debug.unprofile('tick')

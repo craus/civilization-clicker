@@ -53,7 +53,7 @@ function market(verb, id, generateDeal)
       return this.level >= 1
     },
     remainingTime: function() {
-      return -(resources[from]()+this.deal.change[from]) / resources[from].income()
+      return timeUntil(() => resources[from]()+this.deal.change[from] >= 0)
     },
     paint: function() {
       panel.find('.level').text(this.level)
