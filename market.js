@@ -1,10 +1,26 @@
 
 
-function market(id, generateDeal)
+function market(verb, id, generateDeal)
 {
-  var panel = $('.market.'+id)
+  var panel = instantiate("marketSample")
+  $('.#{0}Marketplace'.i(id)).append(panel)
   var accept = panel.find('.accept')
   var decline = panel.find('.decline')
+  
+  var deal = generateDeal(0)
+  
+  var from = deal.resourceFrom
+  var to = deal.resourceTo
+  
+  panel.find('.name').text(id.capitalize())
+  panel.find('.from.name').text(deal.resourceFrom)
+  panel.find('.to.name').text(id)
+  panel.find('.from .name').text(deal.resourceFrom.capitalize())
+  panel.find('.to .name').text(deal.resourceTo.capitalize())
+  
+  panel.find('.from').toggleClass(from, true)
+  panel.find('.to').toggleClass(to, true)
+  panel.find('.verb').text(verb)
   
   var result = $.extend({
     level: 0,
@@ -40,9 +56,9 @@ function market(id, generateDeal)
       panel.find('.level').text(this.level)
       decline.toggleClass('disabled', !this.declinable())
       accept.toggleClass('disabled', !this.affordable())
-      Object.entries(this.deal.change).forEach(c => {
-        setFormattedText(panel.find('.#{0}'.i(c[0])), large(Math.abs(c[1])))
-      })
+      
+      panel.find('.from.change').text(large(-this.deal.change[from]))
+      panel.find('.to.change').text(large(this.deal.change[to]))
     },
     save: function() {
       savedata.markets = savedata.markets || {}
@@ -72,7 +88,7 @@ function market(id, generateDeal)
 
 function createAllMarkets() {
   return {
-    scientists: market('scientists', z => rand.deal({
+    scientists: market('Hire', 'scientists', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'scientists',
       zoomFrom: 0.5 * z + 0.3,
@@ -80,7 +96,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    houses: market('houses', z => rand.deal({
+    houses: market('Build', 'houses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'population',
       zoomFrom: 0.5 * z + 0.5,
@@ -88,7 +104,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    farms: market('farms', z => rand.deal({
+    farms: market('Build', 'farms', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'farms',
       zoomFrom: 0.5 * z + 3,
@@ -96,7 +112,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    mines: market('mines', z => rand.deal({
+    mines: market('Build', 'mines', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'mines',
       zoomFrom: 0.5 * z + 1,
@@ -104,7 +120,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    soldiers: market('soldiers', z => rand.deal({
+    soldiers: market('Train', 'soldiers', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'soldiers',
       zoomFrom: 0.5 * z + 1,
@@ -112,7 +128,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    barracks: market('barracks', z => rand.deal({
+    barracks: market('Build', 'barracks', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'barracks',
       zoomFrom: 0.5 * z + 2,
@@ -120,7 +136,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    celebrations: market('celebrations', z => rand.deal({
+    celebrations: market('Organize', 'celebrations', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'happiness',
       zoomFrom: 0.5 * z + 1,
@@ -128,7 +144,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    circuses: market('circuses', z => rand.deal({
+    circuses: market('Build', 'circuses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'circuses',
       zoomFrom: 0.5 * z + 3,
@@ -136,7 +152,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    marketplaces: market('marketplaces', z => rand.deal({
+    marketplaces: market('Build', 'marketplaces', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'marketplaces',
       zoomFrom: 0.5 * z + 1,
@@ -144,7 +160,7 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    labs: market('labs', z => rand.deal({
+    labs: market('Build', 'labs', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'labs',
       zoomFrom: 0.5 * z + 1,

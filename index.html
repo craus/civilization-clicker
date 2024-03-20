@@ -64,23 +64,39 @@
 
 <body>
 
-<div class="panel panel-primary market mines minesTechRequired hidden">
-  <div class="panel-heading"><h3>Mines market level <span class="level">?</span></h3></div>
-  <div class="panel-body big">
-    <span class="deal">
-      Build <span class="mines label label-primary">?</span> mines 
-      for <span class="minerals label label-primary">?</span> minerals
-    </span>
+<div class="marketSample hidden">
+  <div class="panel panel-default panel-readiness"> 
+    <div class="panel-body big from">
+      <span class="name">???</span>:
+      <span class="value">?</span> 
+      <span class="label label-success income">+?</span>
+    </div>
   </div>
-  <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-    </div>
-  </div> 
-</div>  
+  <div class="panel panel-default panel-readiness"> 
+    <div class="panel-body big to">
+      <span class="name">???</span>:
+      <span class="value">?</span> 
+      <span class="label label-success income">+?</span>
+    </div> 
+  </div>   
+  <div class="panel panel-primary market">
+    <div class="panel-heading"><h3><span class="name">???</span> market level <span class="level">?</span></h3></div>
+    <div class="panel-body big">
+      <span class="deal">
+        <span class="verb">???</span> <span class="to change label label-primary">?</span> <span class="to name">???</span> 
+        for <span class="from change label label-primary">?</span> <span class="from name">???</span>
+      </span>
+    </div>     
+    <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
+      </div>
+    </div> 
+  </div>   
+</div>
 
 <div class="container"> 
   <br> 
@@ -176,76 +192,19 @@
       <br>
       <div class="tab-content">
         <div id="houses" class="tab-pane fade"> 
+          <div class="panel panel-default">       
+            <div class="panel-body">
+              <span class="name">Each house increases population by 1.</span>
+            </div>
+          </div>     
           <div class="row centered">
-            <div class="col-sm-6"> 
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big minerals">
-                  <span class="name">Minerals:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div> 
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big population">
-                  <span class="name">Population:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div>  
-              <div class="panel panel-primary market houses mineralsTechRequired">
-                <div class="panel-heading"><h3>Houses market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="population label label-primary">?</span> houses 
-                    for <span class="minerals label label-primary">?</span> minerals
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>  
+            <div class="col-sm-6 housesMarketplace">
             </div>
           </div>
         </div>
         <div id="farms" class="tab-pane fade">     
           <div class="row centered">
-            <div class="col-sm-6">    
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big minerals">
-                  <span class="name">Minerals:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div> 
-              <div class="panel panel-default panel-readiness farmsTechRequired">       
-                <div class="panel-body big farms">
-                  <span class="name">Farms:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div>
-              </div>
-              <div class="panel panel-primary market farms farmsTechRequired">
-                <div class="panel-heading"><h3>Farms market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="farms label label-primary">?</span> farms 
-                    for <span class="minerals label label-primary">?</span> minerals
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>  
+            <div class="col-sm-6 farmsMarketplace">  
             </div>  
             <div class="col-sm-6">    
               <div class="panel panel-default panel-readiness">   
@@ -269,87 +228,25 @@
       <br>
       
       <div class="tab-content">
-        <div id="festivalsTab" class="tab-pane fade"> 
+        <div id="festivalsTab" class="tab-pane fade">
+          <div class="panel panel-default">       
+            <div class="panel-body">
+              <span class="name">Each festival increases happiness by 1.</span>
+            </div>
+          </div>        
           <div class="row centered">
-            <div class="col-sm-6"> 
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big money">
-                  <span class="name">Money:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div>      
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big happiness">
-                  <span class="name">Happiness:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div>   
-              <div class="panel panel-default panel-readiness moneyTechRequired">       
-                <div class="panel-body big">
-                  <span class="name">Organize a festival (+1 happiness)</span>
-                </div>
-              </div>
-              <div class="panel panel-primary market celebrations celebrationsTechRequired">
-                <div class="panel-heading"><h3>Festivals market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Organize <span class="happiness label label-primary">?</span> festivals 
-                    for <span class="money label label-primary">?</span> money
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>
+            <div class="col-sm-6 celebrationsMarketplace"> 
             </div>
           </div>     
         </div>
         <div id="circusesTab" class="tab-pane fade"> 
+          <div class="panel panel-default">       
+            <div class="panel-body">
+              <span class="name">Each circus gives 1 happiness per second.</span>
+            </div>
+          </div>          
           <div class="row centered">
-            <div class="col-sm-6"> 
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big minerals">
-                  <span class="name">Minerals:</span>
-                  <span class="value">?</span>
-                  <span class="label label-success income">+?</span>
-                </div>   
-              </div>         
-              <div class="panel panel-default panel-readiness">       
-                <div class="panel-body big circuses">
-                  <span class="name">Circuses:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div>
-              </div>   
-              <div class="panel panel-default panel-readiness">   
-                <div class="panel-body big happiness">
-                  Build a circus (+1 happiness/second)
-                </div>   
-              </div>                 
-              <div class="panel panel-primary market circuses circusesTechRequired">
-                <div class="panel-heading"><h3>Circuses market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="circuses label label-primary">?</span> circuses 
-                    for <span class="minerals label label-primary">?</span> minerals
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>  
+            <div class="col-sm-6 circusesMarketplace"> 
             </div>
             <div class="col-sm-6"> 
               <div class="panel panel-default panel-readiness">   
@@ -366,94 +263,25 @@
     </div>
     <div id="industry" class="tab-pane fade">
       <br>
+      <div class="panel panel-default">       
+        <div class="panel-body">
+          <span class="name">Each mine gives 1 mineral per second.</span>
+        </div>
+      </div>     
       <div class="row centered">
-        <div class="col-sm-6">    
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big minerals">
-              <span class="name">Minerals:</span>
-              <span class="value">?</span>
-              <span class="label label-success income">+?</span>
-            </div>   
-          </div> 
-          <div class="panel panel-default panel-readiness minesTechRequired">       
-            <div class="panel-body big mines">
-              <span class="name">Mines:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg buildMines hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Build <span class="mines">?</span> (<span class="minerals">?</span> minerals)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
-            </div>
-          </div> 
-          
-          <div class="panel panel-primary market mines minesTechRequired">
-            <div class="panel-heading"><h3>Mines market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Build <span class="mines label label-primary">?</span> mines 
-                for <span class="minerals label label-primary">?</span> minerals
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>        
+        <div class="col-sm-6 minesMarketplace">    
         </div>
       </div>     
     </div>
     <div id="economy" class="tab-pane fade">
-      <br>
+      <br>      
+      <div class="panel panel-default">       
+        <div class="panel-body">
+          <span class="name">Each marketplace gives +100% money income.</span>
+        </div>
+      </div> 
       <div class="row centered">
-        <div class="col-sm-7">    
-          <div class="panel panel-default panel-readiness">   
-            <div class="panel-body big minerals">
-              <span class="name">Minerals:</span>
-              <span class="value">?</span>
-              <span class="label label-success income">+?</span>
-            </div>   
-          </div> 
-          <div class="panel panel-default panel-readiness marketplacesTechRequired">       
-            <div class="panel-body big marketplaces">
-              <span class="name">Marketplaces:</span>
-              <span class="value">?</span> 
-              <span class="label label-success income">+?</span>
-              <br>
-              <div class="btn-group btn-group-lg buildMarketplaces hidden">
-                <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                  Build <span class="marketplaces">?</span> (<span class="minerals">?</span> minerals)
-                </button>
-                <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-primary market marketplaces marketplacesTechRequired">
-            <div class="panel-heading"><h3>Marketplaces market level <span class="level">?</span></h3></div>
-            <div class="panel-body big">
-              <span class="deal">
-                Build <span class="marketplaces label label-primary">?</span> marketplaces
-                for <span class="minerals label label-primary">?</span> minerals
-              </span>
-            </div>
-            <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-              </div>
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-              </div>
-            </div> 
-          </div>  
+        <div class="col-sm-7 marketplacesMarketplace">    
         </div>
       </div>     
     </div>
@@ -467,79 +295,9 @@
       <div class="row centered">
         <div class="col-sm-6"> 
           <div class="tab-content">
-            <div id="scientists" class="tab-pane fade">  
-              <div class="panel panel-default panel-readiness">       
-                <div class="panel-body big money">
-                  <span class="name">Money:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div> 
-              </div>  
-              <div class="panel panel-default panel-readiness">       
-                <div class="panel-body big scientists">
-                  <span class="name">Scientists:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div> 
-              </div>  
-              <div class="panel panel-primary market scientists">
-                <div class="panel-heading"><h3>Scientists market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Hire <span class="scientists label label-primary">?</span> scientists 
-                    for <span class="money label label-primary">?</span> money
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>     
+            <div id="scientists" class="tab-pane fade scientistsMarketplace">  
             </div>
-            <div id="labs" class="tab-pane fade">
-              <div class="panel panel-default panel-readiness">       
-                <div class="panel-body big minerals">
-                  <span class="name">Minerals:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div> 
-              </div>              
-              <div class="panel panel-default panel-readiness labsTechRequired">       
-                <div class="panel-body big labs">
-                  <span class="name">Labs:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                  <br>
-                  <div class="btn-group btn-group-lg buildLabs hidden">
-                    <button tab-index="-1" type="button" class="btn btn-primary less nohover">&lt;</button>
-                    <button tab-index="-1" type="button" class="btn btn-primary buy nohover">
-                      Build <span class="labs">?</span> (<span class="minerals">?</span> minerals)
-                    </button>
-                    <button tab-index="-1" type="button" class="btn btn-primary more nohover">&gt;</button>
-                  </div>
-                </div>
-              </div>   
-              <div class="panel panel-primary market labs labsTechRequired">
-                <div class="panel-heading"><h3>Labs market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="labs label label-primary">?</span> labs 
-                    for <span class="minerals label label-primary">?</span> minerals
-                  </span>
-                </div>
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div> 
+            <div id="labs" class="tab-pane fade labsMarketplace">
             </div>
           </div>
         </div>
@@ -795,74 +553,9 @@
         <div class="col-sm-6">  
 
           <div class="tab-content military">
-            <div id="soldiersTab" class="tab-pane fade">
-              <div class="panel panel-default panel-readiness"> 
-                <div class="panel-body big money">
-                  <span class="name">Money:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div>
-              </div>
-              <div class="panel panel-default panel-readiness"> 
-                <div class="panel-body big soldiers">
-
-                  <span class="name">Soldiers:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div> 
-              </div>  
-              <div class="panel panel-primary market soldiers">
-                <div class="panel-heading"><h3>Soldiers market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="soldiers label label-primary">?</span> soldiers 
-                    for <span class="money label label-primary">?</span> money
-                  </span>
-                </div>     
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>   
+            <div id="soldiersTab" class="tab-pane fade soldiersMarketplace">
             </div>  
-
-            <div id="barracksTab" class="tab-pane fade">
-              <div class="panel panel-default panel-readiness"> 
-                <div class="panel-body big minerals">
-                  <span class="name">Minerals:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div>
-              </div>
-              <div class="panel panel-default panel-readiness"> 
-                <div class="panel-body big soldiers">
-
-                  <span class="name">Soldiers:</span>
-                  <span class="value">?</span> 
-                  <span class="label label-success income">+?</span>
-                </div> 
-              </div>  
-              <div class="panel panel-primary market soldiers">
-                <div class="panel-heading"><h3>Soldiers market level <span class="level">?</span></h3></div>
-                <div class="panel-body big">
-                  <span class="deal">
-                    Build <span class="soldiers label label-primary">?</span> soldiers 
-                    for <span class="money label label-primary">?</span> money
-                  </span>
-                </div>     
-                <div class="panel-footer btn-group btn-group-justified" role="group" aria-label="Justified button group">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger btn-lg decline nohover">Decline</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-success btn-lg accept nohover">Accept</button>
-                  </div>
-                </div> 
-              </div>   
+            <div id="barracksTab" class="tab-pane fade barracksMarketplace">
             </div>
           </div>
         </div>

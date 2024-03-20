@@ -59,6 +59,13 @@ String.prototype.i = function() {
   return Object.entries(args).reduce((s, entry) => s.replaceAll('#{'+entry[0]+'}', entry[1]), this.toString())
 }
 
+Object.defineProperty(String.prototype, 'capitalize', {
+  value: function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  },
+  enumerable: false
+});
+
 Math.sign = function(x) {
   if (x > 0) {
     return 1

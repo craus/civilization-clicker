@@ -93,6 +93,9 @@ function createAllResources() {
     resources.soldiers() *
     (1+resources.panzers())
   )
+  resources.soldiers.income = (() =>
+    resources.barracks()
+  )
   resources.population.income = (() => 
     resources.farms() *
     (1+resources.tractors()) *

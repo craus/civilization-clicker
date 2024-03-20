@@ -49,17 +49,17 @@ var init = function() {
   }, 100)
   
   window.onkeydown = function(e) {
-    console.log(e)
+    //console.log(e)
     if (!input.contains(e.key)) {
       input.push(e.key)
     }
     if (!recentInput.contains(e.key)) {
       recentInput.push(e.key)
     }
-    console.log(input)
+    //console.log(input)
   }
   window.onkeyup = function(e) {
-    console.log(e)
+    //console.log(e)
     input.remove(e.key)
     console.log(input)
   }
