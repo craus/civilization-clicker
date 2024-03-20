@@ -96,6 +96,22 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
+    universities: market('Build', 'universities', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'universities',
+      zoomFrom: 0.5 * z + 3,
+      zoomTo: z => 0.813*Math.pow(z, 0.8) - 1,
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
+    labs: market('Build', 'labs', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'labs',
+      zoomFrom: 0.5 * z + 1,
+      zoomTo: z => 0.574*Math.pow(z, 0.55),
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    }))
     houses: market('Build', 'houses', z => rand.deal({
       resourceFrom: 'minerals',
       resourceTo: 'population',
@@ -136,6 +152,14 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
+    bunkers: market('Build', 'bunkers', z => rand.deal({
+      resourceFrom: 'minerals',
+      resourceTo: 'bunkers',
+      zoomFrom: 0.5 * z + 2,
+      zoomTo: z => 2.05*Math.pow(z, 0.48) - 1,
+      qualitySpread: 0.5,
+      zoomSpread: 0.5
+    })),
     celebrations: market('Organize', 'celebrations', z => rand.deal({
       resourceFrom: 'money',
       resourceTo: 'happiness',
@@ -160,13 +184,5 @@ function createAllMarkets() {
       qualitySpread: 0.5,
       zoomSpread: 0.5
     })),
-    labs: market('Build', 'labs', z => rand.deal({
-      resourceFrom: 'minerals',
-      resourceTo: 'labs',
-      zoomFrom: 0.5 * z + 1,
-      zoomTo: z => 0.574*Math.pow(z, 0.55),
-      qualitySpread: 0.5,
-      zoomSpread: 0.5
-    }))
   }
 }

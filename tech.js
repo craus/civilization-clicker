@@ -77,12 +77,14 @@ function createAllTechs() {
     mines: tech(0, 'minesTech', 'Mining'),
     marketplaces: tech(0, 'marketplacesTech', 'Economy'),
     labs: tech(0, 'labsTech', 'Centralized Studies'),
-    military: tech(0, 'militaryTech', 'Military'),
     happiness: tech(0, 'happinessTech', 'Sociology'),
+    circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
     minersGuild: tech(0, 'minersGuildTech', 'Miners Guild'),
     scientistsGuild: tech(0, 'scientistsGuildTech', 'Scientists Guild'),
-    circuses: tech(0, 'circusesTech', 'Applied Entertainment'),
+    universities: tech(0, 'universitiesTech', 'High Education'),
+    military: tech(0, 'militaryTech', 'Military'),
     barracks: tech(0, 'barracksTech', 'Field Constructions'),
+    bunkers: tech(0, 'bunkersTech', 'Field Fortifications'),
     win: tech(0, 'winTech', 'Interplanet Colonization')
   }
   
@@ -90,6 +92,7 @@ function createAllTechs() {
   techs.mines.require(techs.minerals)
   techs.marketplaces.require(techs.minerals)
   techs.labs.require(techs.minerals)
+  techs.universities.require(techs.minerals)
   techs.circuses.require(techs.happiness)
   techs.circuses.require(techs.minerals)
   techs.minersGuild.require(techs.happiness)
@@ -97,6 +100,8 @@ function createAllTechs() {
   techs.scientistsGuild.require(techs.happiness)
   techs.barracks.require(techs.military)
   techs.barracks.require(techs.minerals)
+  techs.bunkers.require(techs.military)
+  techs.bunkers.require(techs.minerals)
   
   Object.values(techs).forEach(t => {if (t != techs.win) techs.win.require(t)})
   
