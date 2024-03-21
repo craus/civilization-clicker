@@ -114,6 +114,20 @@ function createCivilization(params) {
   })
   updateTimeSkip()
   
+  var updateShowTimers = () => {
+    $('.showTimers .off').toggle(resources.showTimers() == 0)
+    $('.showTimers .on').toggle(resources.showTimers() == 1)
+  }
+  $('.showTimers .switchOn').click(() => {
+    resources.showTimers.value = 1
+    updateShowTimers()
+  })
+  $('.showTimers .switchOff').click(() => {
+    resources.showTimers.value = 0
+    updateShowTimers()
+  })
+  updateShowTimers()
+  
   civilization = {
     backup: function() {
       Object.values(resources).each('backup')
