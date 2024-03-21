@@ -77,9 +77,13 @@ function market(verb, id, generateDeal)
       accept.toggleClass('disabled', !this.affordable() && resources.timeSkip() == 0)
       
       panel.find('.unavailable').toggle(!this.affordable())
-      panel.find('.remainingTime').text(Format.time(this.remainingTime()))
       
-      panel.find('.action').text(this.affordableMoment().result ? 'Accept' : 'Wait')
+      if (resources.showTimers() == 1) {
+        panel.find('.remainingTime').text(Format.time(this.remainingTime()))
+        panel.find('.action').text(this.affordableMoment().result ? 'Accept' : 'Wait')
+      } else {
+        panel.find('.action').text('Accept')
+      }
       
       panel.find('.from.change').text(large(-this.deal.change[from]))
       panel.find('.to.change').text(large(this.deal.change[to]))
