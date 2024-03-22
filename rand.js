@@ -29,16 +29,20 @@
     deal: function(params) {
       params.zoomSpread ??= 0
       params.qualitySpread ??= 0
+      params.randomZoomToQuality ??= 0
       params.zoomSpread = Math.clamp(params.zoomSpread, 0, params.zoomFrom/3)
       
       var result = Object.assign({}, params)
       
       result.baseZoomFrom = result.zoomFrom
-      result.zoomFrom = result.baseZoomFrom + rand.normal() * result.zoomSpread
+      result.randomZoom = rand.normal() * result.zoomSpread
+      result.zoomFrom = result.baseZoomFrom + result.randomZoom
       
       result.baseZoomTo = params.zoomTo(Math.clamp(result.zoomFrom, 0))
-      result.zoomTo = result.baseZoomTo + rand.normal() * result.qualitySpread
-      
+      result.randomQuality = rand.normal() * result.qualitySpread
+      result.randomZoomBasedQuality = result.randomZoom * result.randomZoomToQuality
+      result.zoomTo = result.baseZoomTo + result.randomQuality + result.randomZoomBasedQuality
+
       result.change = {}
       result.change[params.resourceFrom] = -Math.clamp(approx(Math.pow(10, result.zoomFrom)), 1)
       result.change[params.resourceTo] = +Math.clamp(approx(Math.pow(10, result.zoomTo)), 1)
